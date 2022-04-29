@@ -1,8 +1,7 @@
 <template>
-  <div class="money-nav">
-    <!-- 增加一层，将其用flex-grow膨胀，让导航部分被挤到最下方 -->
-    <div class="content">more-money.vue</div>
-    <Nav />
+  <div>
+    <!-- 使用全局组件layout -->
+    <layout>因为用了slot而可以生效的money部分</layout>
   </div>
 </template>
 
@@ -17,13 +16,13 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .money-nav {
-  border: 10px solid pink;
+  // border: 10px solid pink;
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 .content {
-  border: 3px solid red;
+  border: 1px solid red;
   // 让其占据剩余空间，这样nav部分就被挤到最下面了
   flex-grow: 1;
   overflow: auto;
