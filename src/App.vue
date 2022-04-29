@@ -1,10 +1,15 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <!-- 不同路径下展示不同的内容 -->
     <router-view />
+
+    <hr />
+    <!-- 下面是导航栏，通往不同的页面 -->
+    <router-link to="/money">记账</router-link>
+    |
+    <router-link to="/labels">标签</router-link>
+    |
+    <router-link to="/statistics">统计</router-link>
   </div>
 </template>
 
@@ -21,7 +26,7 @@ export default {};
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: $red;
+  // background-color: $red;
 }
 
 #nav {

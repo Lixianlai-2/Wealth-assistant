@@ -1,10 +1,10 @@
 <template>
-  <div></div>
+  <div>Money.vue</div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-console.log("works");
+console.log("works!");
 
 export default Vue.extend({});
 </script>
