@@ -1,7 +1,6 @@
 <template>
   <div>
-    labels.vue
-    <Nav />
+    <layout>因为用了slot而可以生效的lables部分</layout>
   </div>
 </template>
 

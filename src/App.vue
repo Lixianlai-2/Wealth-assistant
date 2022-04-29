@@ -6,6 +6,12 @@
 </template>
 
 <script>
+import Vue from "vue";
+import layout from "@/components/layout.vue";
+
+// 全局注册组件layout
+Vue.component("layout", layout);
+
 export default {};
 </script>
 
