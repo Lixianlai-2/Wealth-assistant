@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nav-self">
     <!-- 下面是导航栏，通往不同的页面 -->
     <router-link to="/money">记账</router-link>
     |
@@ -15,4 +15,8 @@ import Vue from "vue";
 export default Vue.extend({});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.nav-self {
+  border: 1px solid green;
+}
+</style>
