@@ -2,14 +2,6 @@
   <div id="app">
     <!-- 不同路径下展示不同的内容 -->
     <router-view />
-
-    <hr />
-    <!-- 下面是导航栏，通往不同的页面 -->
-    <router-link to="/money">记账</router-link>
-    |
-    <router-link to="/labels">标签</router-link>
-    |
-    <router-link to="/statistics">统计</router-link>
   </div>
 </template>
 

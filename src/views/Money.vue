@@ -1,12 +1,17 @@
 <template>
-  <div>Money.vue</div>
+  <div>
+    money.vue
+    <Nav />
+  </div>
 </template>
 
 <script lang="ts">
+// import Nav from "@/components/Nav.vue";
 import Vue from "vue";
-console.log("works!");
 
-export default Vue.extend({});
+export default Vue.extend({
+  // components: { Nav },
+});
 </script>
 
 <style lang="scss" scoped></style>
