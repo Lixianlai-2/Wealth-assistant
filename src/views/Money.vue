@@ -1,7 +1,11 @@
 <template>
   <div>
     <!-- 使用全局组件layout -->
+<<<<<<< HEAD
     <layout><h1>money.vue的内容</h1> </layout>
+=======
+    <layout>因为用了slot而可以生效的money部分</layout>
+>>>>>>> 9334c46c822d10c43c65e76bc6207d8045f3fb5a
   </div>
 </template>
 
