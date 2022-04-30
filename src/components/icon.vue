@@ -30,7 +30,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .iconStyle {
-  //   border: 1px solid red;
   width: 32px;
   height: 32px;
   vertical-align: -0.15em;

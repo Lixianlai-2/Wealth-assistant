@@ -6,11 +6,11 @@
 
 <script lang="ts">
 // import Nav from "@/components/Nav.vue";
-import layout from "@/components/layout.vue";
+// import layout from "@/components/layout.vue";
 import Vue from "vue";
 
 export default Vue.extend({
-  components: { layout },
+  // components: { layout },
   // components: { Nav },
 });
 </script>
