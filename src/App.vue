@@ -8,9 +8,13 @@
 <script>
 import Vue from "vue";
 import layout from "@/components/layout.vue";
+import icon from "@/components/icon.vue";
 
 // 全局注册组件layout
 Vue.component("layout", layout);
+
+// 全局注册icon组件
+Vue.component("icon", icon);
 
 export default {};
 </script>

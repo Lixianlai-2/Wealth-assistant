@@ -1,13 +1,16 @@
 <template>
   <div>
     <!-- 使用全局组件layout -->
-    <layout>因为用了slot而可以生效的money部分</layout>
+    <layout><h1>money.vue的内容</h1> </layout>
   </div>
 </template>
 
 <script lang="ts">
 // import Nav from "@/components/Nav.vue";
 import Vue from "vue";
+import moneyImg from "@/assets/icons/money.svg";
+
+console.log(moneyImg);
 
 export default Vue.extend({
   // components: { Nav },
