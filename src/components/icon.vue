@@ -1,5 +1,5 @@
 <template>
-  <div class>
+  <div class="iconContainer">
     <svg class="iconStyle">
       <!-- 用v-bind之后，等号里面变成js表达式 -->
       <use :xlink:href="'#' + iconName" />
@@ -30,8 +30,9 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .iconStyle {
-  width: 1em;
-  height: 1em;
+  //   border: 1px solid red;
+  width: 32px;
+  height: 32px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;

@@ -24,7 +24,7 @@ export default Vue.extend({});
   height: 100vh;
 }
 .content {
-  border: 1px solid red;
+  // border: 1px solid red;
   // 让其占据剩余空间，这样nav部分就被挤到最下面了
   flex-grow: 1;
   overflow: auto;
