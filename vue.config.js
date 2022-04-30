@@ -9,16 +9,20 @@ module.exports = {
 
     config.module
       .rule("svg-sprite")
-
       .test(/\.svg$/) // 如果匹配上这个正则，就用这个规则
-
       .include.add(dir) // 只在dir目录下的svg走这个规则
       .end() // 只包含 icons 目录
-
       .use("svg-sprite-loader") // 使用哪些loader
       .loader("svg-sprite-loader")
-
       .options({ extract: false }) // 不要把它解析出文件
+      .end()
+      // 使用svgo-loader，批量删除svg里面的fill属性
+      .use("svgo-loader")
+      .loader("svgo-loader")
+      .tap((options) => ({
+        ...options,
+        plugins: [{ removeAttrs: { attrs: "fill" } }],
+      }))
       .end();
     config
       // 配置插件
