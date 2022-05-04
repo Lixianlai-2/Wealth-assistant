@@ -2,23 +2,40 @@
   <nav>
     <!-- 下面是导航栏，通往不同的页面 -->
     <router-link to="/money" class="item" active-class="selected">
-      <icon iconName="money" />
+      <svg>
+        <use xlink:href="#money"></use>
+      </svg>
+      <!-- <icon iconName="money" /> -->
       记账
     </router-link>
 
     <router-link to="/labels" class="item" active-class="selected">
-      <icon iconName="label" />
+      <!-- <icon iconName="label" /> -->
       标签
     </router-link>
 
     <router-link to="/statistics" class="item" active-class="selected">
-      <icon iconName="statistics" />
+      <!-- <icon iconName="statistics" /> -->
       统计
     </router-link>
   </nav>
 </template>
 
 <script lang="ts">
+// 单独引入图片
+import moneyIC from "@/assets/icons/moneyIC.svg";
+console.log(moneyIC);
+
+// // 一次引入svg图标;
+// let importAll = (requireContext: __WebpackModuleApi.RequireContext) =>
+//   requireContext.keys().forEach(requireContext);
+
+// try {
+//   importAll(require.context("../assets/icons", true, /\.svg$/));
+// } catch (error) {
+//   console.log(error);
+// }
+
 import Vue from "vue";
 
 export default Vue.extend({});
