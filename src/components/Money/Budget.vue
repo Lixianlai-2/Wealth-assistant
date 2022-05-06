@@ -9,24 +9,43 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "Budget",
-  data() {
-    return {
-      // 一开始type就是-所以一开始阴影就在支出上
-      type: "-", // '-'表示支出，'+'表示收入
-    };
-  },
-  methods: {
-    selectType(type) {
-      if (type !== "-" && type !== "+") {
-        throw new Error("type is unknown!");
-      }
-      this.type = type;
-    },
-  },
-};
+<script lang="ts">
+// 注意要先引入Vue
+import Vue from "vue";
+
+// 引入并使用装饰器
+import { Component } from "vue-property-decorator";
+@Component
+export default class Budget extends Vue {
+  // 注意数据这里变成了=赋值，而不是:
+  type = "-";
+
+  selectType(type: string) {
+    if (type !== "-" && type !== "+") {
+      throw new Error("type is unknown!");
+    }
+    this.type = type;
+  }
+}
+
+// export default {
+//   name: "Budget",
+//   data() {
+//     return {
+//       // 一开始type就是-所以一开始阴影就在支出上
+//       type: "-", // '-'表示支出，'+'表示收入
+//     };
+//   },
+//   methods: {
+//     selectType(type: string) {
+//       if (type !== "-" && type !== "+") {
+//         throw new Error("type is unknown!");
+//       }
+//       this.type = type;
+//     },
+//   },
+//   props: [],
+// };
 </script>
 
 <style lang="scss" scoped>
