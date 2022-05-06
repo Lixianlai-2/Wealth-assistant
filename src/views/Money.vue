@@ -3,7 +3,7 @@
     <layout contentClass="growTags" class-prefix="layout">
       <Tags />
       <Remarker />
-      <Budget />
+      <Budget :propA="1" />
       <numberPad />
     </layout>
   </div>

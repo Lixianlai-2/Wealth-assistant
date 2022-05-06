@@ -14,9 +14,15 @@
 import Vue from "vue";
 
 // 引入并使用装饰器
-import { Component } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 @Component
 export default class Budget extends Vue {
+  @Prop(Number) propA: number | undefined;
+  // @Prop告诉Vue propA 不是data，而是prop
+  // Number告诉Vue propA在JavaScript运行时是Number
+  // propA是属性名
+  // number | undefined告诉TS propA编译时的类型
+
   // 注意数据这里变成了=赋值，而不是:
   type = "-";
 
@@ -25,6 +31,18 @@ export default class Budget extends Vue {
       throw new Error("type is unknown!");
     }
     this.type = type;
+  }
+
+  mounted() {
+    // 这里编译错误，只在终端提示错误
+    console.log(this.propA.xxx);
+
+    // 不影响下面的运行
+    console.log("李先来2");
+
+    if (this.propA === undefined) {
+      console.log("应该是数字哦");
+    }
   }
 }
 
