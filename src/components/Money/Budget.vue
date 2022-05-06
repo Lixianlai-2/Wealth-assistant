@@ -1,15 +1,31 @@
 <template>
   <div class="budgetContainer">
     <ul>
-      <li class="selected">支出</li>
-      <li>收入</li>
+      <!-- 当type等于-时，才让class等于selected -->
+      <li :class="type === '-' && 'selected'" @click="selectType('-')">支出</li>
+      <!-- 当type等于-时，才让class等于selected -->
+      <li :class="type === '+' && 'selected'" @click="selectType('+')">收入</li>
     </ul>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   name: "Budget",
+  data() {
+    return {
+      // 一开始type就是-所以一开始阴影就在支出上
+      type: "-", // '-'表示支出，'+'表示收入
+    };
+  },
+  methods: {
+    selectType(type) {
+      if (type !== "-" && type !== "+") {
+        throw new Error("type is unknown!");
+      }
+      this.type = type;
+    },
+  },
 };
 </script>
 
