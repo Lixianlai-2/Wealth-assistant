@@ -1,14 +1,14 @@
 <template>
   <div class="tags">
+    <div class="new">
+      <button @click="add">新增标签</button>
+    </div>
     <ul>
       <li>衣</li>
       <li>食</li>
       <li>住</li>
       <li>行</li>
     </ul>
-    <div class="new">
-      <button @click="add">新增标签</button>
-    </div>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
   padding: 16px;
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   ul {
     display: flex;
     flex-wrap: wrap;

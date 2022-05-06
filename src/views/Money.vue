@@ -1,6 +1,6 @@
 <template>
   <div>
-    <layout contentClass="growTags">
+    <layout contentClass="growTags" class-prefix="layout">
       <Tags />
       <Remarker />
       <Budget />
@@ -41,12 +41,10 @@ export default Vue.extend({
 </script>
 
 <style>
-/* .xxx-content {
-
+.layout-content {
+  display: flex;
+  flex-direction: column;
 }
-.xxx-prefix {
-
-} */
 
 .growTags {
   display: flex;

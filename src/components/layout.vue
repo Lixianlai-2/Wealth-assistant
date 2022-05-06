@@ -1,7 +1,7 @@
 <template>
-  <div class="layout-nav">
+  <div class="layout-nav" :class="classPrefix && `${classPrefix}-wrapper`">
     <!-- 增加一层，将其用flex-grow膨胀，让导航部分被挤到最下方 -->
-    <div class="content" :class="contentClass">
+    <div class="content" :class="classPrefix && `${classPrefix}-content`">
       <!-- <slot> 元素作为组件模板之中的内容分发插槽。<slot> 元素自身将被替换 -->
       <slot />
       <!-- <slot></slot>  -->
@@ -14,7 +14,7 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  props: ["contentClass"],
+  props: ["contentClass", "classPrefix"],
 });
 </script>
 
