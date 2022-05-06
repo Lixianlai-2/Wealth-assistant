@@ -1,27 +1,64 @@
 <template>
   <div class="numberPad">
-    <div class="output">100</div>
+    <div class="output">{{ outputValue }}</div>
     <div class="buttons">
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>删除</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>清空</button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-      <button class="ok">OK</button>
-      <button class="zero">0</button>
-      <button>.</button>
+      <!-- <div class="buttons" v-for="btn in buttons" :key="btn.textContent"> -->
+      <button @click="inputContent">1</button>
+      <button @click="inputContent">2</button>
+      <button @click="inputContent">3</button>
+      <button @click="inputContent">删除</button>
+      <button @click="inputContent">4</button>
+      <button @click="inputContent">5</button>
+      <button @click="inputContent">6</button>
+      <button @click="inputContent">清空</button>
+      <button @click="inputContent">7</button>
+      <button @click="inputContent">8</button>
+      <button @click="inputContent">9</button>
+      <button class="ok" @click="inputContent">OK</button>
+      <button class="zero" @click="inputContent">0</button>
+      <button @click="inputContent">.</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-export default {};
+// 注意要先引入Vue
+import Vue from "vue";
+
+// 引入并使用装饰器
+import { Component, Prop } from "vue-property-decorator";
+@Component
+export default class Budget extends Vue {
+  outputValue = "0"; // 使得默认输出为字符串0
+  inputContent(event: PointerEvent) {
+    const button = event.target as HTMLButtonElement;
+    const userInput = button.textContent as string; // 强制指定类型为string
+
+    // 计算位数到兆截止
+    if (this.outputValue.length >= 14) return;
+
+    if (this.outputValue === "0") {
+      // 当输出框的值是0时
+      // 再次输入0到9
+      // 在下面的字符串中，找到了用户输入的0到9字符串，会返回一个索引位置，找不到就返回-1
+      if ("0123456789".indexOf(userInput) >= 0) {
+        this.outputValue = userInput;
+
+        // 当用户点击的是.时
+      } else if (userInput === ".") {
+        this.outputValue += userInput;
+      }
+
+      // 当输入框不是0时,只是下面这些值才输出到空白栏，排除清空、删除和OK
+    } else if ("0123456789.".indexOf(userInput) >= 0) {
+      // 如果输入框中已经有了点，并且用户输入的也是点，那么就return
+      if (this.outputValue.indexOf(".") >= 0 && userInput === ".") {
+        return;
+      }
+      this.outputValue += userInput;
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -41,6 +78,7 @@ export default {};
     padding: 15px 15px;
     // 让行内元素相对父元素跑到右边去
     text-align: right;
+    // height: 72px;
   }
 
   .buttons {
