@@ -17,13 +17,6 @@ import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 @Component
 export default class Budget extends Vue {
-  @Prop(Number) propA: number | undefined;
-  // @Prop告诉Vue propA 不是data，而是prop
-  // Number告诉Vue propA在JavaScript运行时是Number
-  // propA是属性名
-  // number | undefined告诉TS propA编译时的类型
-
-  // 注意数据这里变成了=赋值，而不是:
   type = "-";
 
   selectType(type: string) {
@@ -32,38 +25,7 @@ export default class Budget extends Vue {
     }
     this.type = type;
   }
-
-  mounted() {
-    // 这里编译错误，只在终端提示错误
-    console.log(this.propA.xxx);
-
-    // 不影响下面的运行
-    console.log("李先来2");
-
-    if (this.propA === undefined) {
-      console.log("应该是数字哦");
-    }
-  }
 }
-
-// export default {
-//   name: "Budget",
-//   data() {
-//     return {
-//       // 一开始type就是-所以一开始阴影就在支出上
-//       type: "-", // '-'表示支出，'+'表示收入
-//     };
-//   },
-//   methods: {
-//     selectType(type: string) {
-//       if (type !== "-" && type !== "+") {
-//         throw new Error("type is unknown!");
-//       }
-//       this.type = type;
-//     },
-//   },
-//   props: [],
-// };
 </script>
 
 <style lang="scss" scoped>
