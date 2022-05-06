@@ -25,7 +25,12 @@ export default Vue.extend({});
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/styles/helper.scss";
+
 nav {
+  // 文字对齐
+  // text-align: center;
+
   // position: relative;
   // border: 1px solid orange;
   display: flex;
@@ -39,15 +44,13 @@ nav {
     // 上下排列
     flex-direction: column;
     width: 33.33333%;
-    // 对容器里面的内容进行横向居中操作
-    justify-content: center;
-    // 对容器里面的内容进行竖向居中操作
-    align-content: center;
+    // 对里面的item们进行居中的操作
+    align-items: center;
     padding: 3px 0 0 0;
   }
 
   .item.selected {
-    color: red;
+    color: $color-highLight;
   }
 }
 </style>

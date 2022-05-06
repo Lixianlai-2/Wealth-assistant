@@ -20,27 +20,12 @@ export default {};
 </script>
 
 <style lang="scss">
-@import "~@/assets/styles/test.scss";
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-}
-
-body {
-  line-height: 1.5em;
-}
+@import "~@/assets/styles/reset.scss";
+@import "~@/assets/styles/helper.scss";
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  font-family: $font-hei;
+  // text-align: center;
   color: #333;
   // background-color: $red;
 }
@@ -57,4 +42,10 @@ body {
     }
   }
 }
+
+// .clearfix::after {
+//   display: block;
+//   content: "";
+//   clear: both;
+// }
 </style>
