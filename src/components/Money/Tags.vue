@@ -1,27 +1,46 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button @click="add">新增标签</button>
+      <button>新增标签</button>
     </div>
     <ul>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>打游戏</li>
+      <li
+        v-for="tag in dataSources"
+        :key="tag"
+        @click="select(tag)"
+        :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
+      >
+        {{ tag }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: "Tags",
-  methods: {
-    add() {
-      alert("works");
-    },
-  },
-};
+import Vue from "vue";
+import { Component, Prop } from "vue-property-decorator";
+// selectedTags.indexOf(tag) >= 0
+@Component
+export default class tags extends Vue {
+  // 外部传入的数据
+  @Prop() dataSources: string[] | undefined;
+
+  // 下面的类型是字符串空数组，让它等于空数组
+  selectedTags: string[] = [];
+
+  // 把对应的tag放到数组中
+  select(tag: string) {
+    const index = this.selectedTags.indexOf(tag); //返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1
+
+    // 如果数组中已经有了这个标签，那么就删除这个
+    if (index >= 0) {
+      this.selectedTags.splice(index, 1); // 从索引index开始，删除1位
+    } else {
+      // 如果数组中没有这个标签，那么就添加到selectedTags数组中
+      this.selectedTags.push(tag);
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -45,9 +64,13 @@ export default {
       margin-right: 12px;
       margin-top: 4px;
     }
-    // justify-content: center;
-    // border: 1px solid blue;
-    // display: flex;
+    $bg: #d9d9d9;
+    li.selected {
+      // 被选中时，颜色变暗
+      background-color: darken($bg, 25%);
+      // 字体变成白色
+      color: aliceblue;
+    }
   }
   > .new {
     // border: 1px solid blue;
