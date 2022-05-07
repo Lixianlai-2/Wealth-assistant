@@ -1,6 +1,6 @@
 <template>
   <div class="numberPad">
-    <div class="output">{{ outputValue }}</div>
+    <div class="output">{{ outputValue || "&nbsp;" }}</div>
     <div class="buttons">
       <!-- <div class="buttons" v-for="btn in buttons" :key="btn.textContent"> -->
       <button @click="inputContent">1</button>
@@ -58,11 +58,17 @@ export default class Budget extends Vue {
   }
 
   deleteBtn() {
-    alert("delete");
+    // 保留0到-1位，且-1位不保留
+    let x = this.outputValue.slice(0, -1); // slice() 方法提取某个字符串的一部分，并返回一个新的字符串，且不会改动原字符串。
+    if (x.length === 0) {
+      this.outputValue = "0";
+    } else {
+      this.outputValue = this.outputValue.slice(0, -1);
+    }
   }
 
   clearBtn() {
-    alert("clear");
+    this.outputValue = "0";
   }
 
   OKBtn() {
