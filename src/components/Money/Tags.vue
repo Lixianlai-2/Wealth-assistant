@@ -39,6 +39,8 @@ export default class tags extends Vue {
       // 如果数组中没有这个标签，那么就添加到selectedTags数组中。选中有颜色
       this.selectedTags.push(tag);
     }
+
+    this.$emit("update:value", [this.selectedTags]);
   }
 
   // 新增标签
@@ -50,9 +52,20 @@ export default class tags extends Vue {
     if (result === "") {
       alert("输入不能为空哟");
       return;
-    } else if (this.dataSources) {
-      this.dataSources.push(result!); // result绝对不为空
+    } else if (result === null) {
+      return;
     }
+
+    if (this.dataSources) {
+      // 避免标签重复
+      if (this.dataSources.indexOf(result) >= 0) {
+        alert("标签重复了");
+        return;
+      }
+      this.$emit("update:dataSources", [...this.dataSources, result]);
+    }
+
+    console.log(result);
   }
 }
 </script>
@@ -65,6 +78,9 @@ export default class tags extends Vue {
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
+
+  // 标签过多时，页面及时滚动
+  overflow: auto;
   ul {
     display: flex;
     flex-wrap: wrap;

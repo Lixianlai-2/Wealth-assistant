@@ -14,9 +14,11 @@
 import Vue from "vue";
 
 // 引入并使用装饰器
-import { Component, Prop } from "vue-property-decorator";
+import { Component, Watch, Prop } from "vue-property-decorator";
 @Component
 export default class Budget extends Vue {
+  // @Prop({ default: "default value" }) type!: string;
+  // @Prop() type!: string;
   type = "-";
 
   selectType(type: string) {
@@ -24,6 +26,11 @@ export default class Budget extends Vue {
       throw new Error("type is unknown!");
     }
     this.type = type;
+  }
+
+  @Watch("type")
+  onValueChange(value: string) {
+    this.$emit("update:value", this.type);
   }
 }
 </script>

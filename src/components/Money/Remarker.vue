@@ -13,13 +13,18 @@
 <script lang="ts">
 import Vue from "vue";
 
-// 因为只是引入其中的一个Component，所以才需要加上括号
-import { Component } from "vue-property-decorator";
+import { Component, Watch } from "vue-property-decorator";
 
 @Component
 export default class remark extends Vue {
   name: "Remarker" | undefined;
   value = "";
+
+  // 检测value值的变化，如果变化了，就触发update:value事件
+  @Watch("value")
+  onValueChange(value: string) {
+    this.$emit("update:value", value);
+  }
 }
 </script>
 

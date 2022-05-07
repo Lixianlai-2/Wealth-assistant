@@ -72,7 +72,7 @@ export default class Budget extends Vue {
   }
 
   OKBtn() {
-    alert("OK");
+    this.$emit("update:value", this.outputValue);
   }
 }
 </script>
