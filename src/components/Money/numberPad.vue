@@ -6,15 +6,15 @@
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
       <button @click="inputContent">3</button>
-      <button @click="inputContent">删除</button>
+      <button @click="deleteBtn">删除</button>
       <button @click="inputContent">4</button>
       <button @click="inputContent">5</button>
       <button @click="inputContent">6</button>
-      <button @click="inputContent">清空</button>
+      <button @click="clearBtn">清空</button>
       <button @click="inputContent">7</button>
       <button @click="inputContent">8</button>
       <button @click="inputContent">9</button>
-      <button class="ok" @click="inputContent">OK</button>
+      <button class="ok" @click="OKBtn">OK</button>
       <button class="zero" @click="inputContent">0</button>
       <button @click="inputContent">.</button>
     </div>
@@ -43,20 +43,30 @@ export default class Budget extends Vue {
       // 在下面的字符串中，找到了用户输入的0到9字符串，会返回一个索引位置，找不到就返回-1
       if ("0123456789".indexOf(userInput) >= 0) {
         this.outputValue = userInput;
-
-        // 当用户点击的是.时
-      } else if (userInput === ".") {
+      } else {
         this.outputValue += userInput;
       }
 
-      // 当输入框不是0时,只是下面这些值才输出到空白栏，排除清空、删除和OK
-    } else if ("0123456789.".indexOf(userInput) >= 0) {
-      // 如果输入框中已经有了点，并且用户输入的也是点，那么就return
+      // 当输出框中的值不是0时
+    } else {
+      // 如果输出框中已经有了点，并且用户输入的也是点，那么就return
       if (this.outputValue.indexOf(".") >= 0 && userInput === ".") {
         return;
       }
       this.outputValue += userInput;
     }
+  }
+
+  deleteBtn() {
+    alert("delete");
+  }
+
+  clearBtn() {
+    alert("clear");
+  }
+
+  OKBtn() {
+    alert("OK");
   }
 }
 </script>
