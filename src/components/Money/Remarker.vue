@@ -1,16 +1,26 @@
 <template>
   <div>
+    <!-- 下面用以测试数据绑定是否实现 -->
+    {{ value }}
     <label class="labelRemark">
       <span class="RemarkText">备注</span>
-      <input type="text" placeholder="在这里输入备注" />
+      <!-- v-model实现数据双向绑定 -->
+      <input type="text" placeholder="在这里输入备注" v-model="value" />
     </label>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: "Remarker",
-};
+import Vue from "vue";
+
+// 因为只是引入其中的一个Component，所以才需要加上括号
+import { Component } from "vue-property-decorator";
+
+@Component
+export default class remark extends Vue {
+  name: "Remarker" | undefined;
+  value = "";
+}
 </script>
 
 <style lang="scss" scoped>
