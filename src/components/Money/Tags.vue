@@ -1,13 +1,13 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>新增标签</button>
+      <button @click="createTag">新增标签</button>
     </div>
     <ul>
       <li
         v-for="tag in dataSources"
         :key="tag"
-        @click="select(tag)"
+        @click="toggle(tag)"
         :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
       >
         {{ tag }}
@@ -22,22 +22,36 @@ import { Component, Prop } from "vue-property-decorator";
 // selectedTags.indexOf(tag) >= 0
 @Component
 export default class tags extends Vue {
-  // 外部传入的数据
-  @Prop() dataSources: string[] | undefined;
+  // 外部传入的数据,readonly是提示不要去修改数据
+  @Prop() readonly dataSources: string[] | undefined;
 
   // 下面的类型是字符串空数组，让它等于空数组
   selectedTags: string[] = [];
 
-  // 把对应的tag放到数组中
-  select(tag: string) {
+  // 把对应的tag添加到selectedTags数组中，或从中删除，以实现selected：true或selected:false
+  toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag); //返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1
 
-    // 如果数组中已经有了这个标签，那么就删除这个
+    // 如果数组中已经有了这个标签，那么就删除这个。也就是说，原来选中有颜色了，就取消颜色
     if (index >= 0) {
       this.selectedTags.splice(index, 1); // 从索引index开始，删除1位
     } else {
-      // 如果数组中没有这个标签，那么就添加到selectedTags数组中
+      // 如果数组中没有这个标签，那么就添加到selectedTags数组中。选中有颜色
       this.selectedTags.push(tag);
+    }
+  }
+
+  // 新增标签
+  createTag() {
+    // 显示一个对话框，对话框中包含一条文字信息，用来提示用户输入文字
+    // result = window.prompt(text, value);
+    let result = window.prompt("新增标签", "看3分钟书");
+
+    if (result === "") {
+      alert("输入不能为空哟");
+      return;
+    } else if (this.dataSources) {
+      this.dataSources.push(result!); // result绝对不为空
     }
   }
 }
