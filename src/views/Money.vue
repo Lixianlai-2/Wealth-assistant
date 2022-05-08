@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ recordList }}
     <layout contentClass="growTags" class-prefix="layout">
       <!-- v-on的缩写就是@，用来绑定事件监听器 -->
       <Tags :dataSources.sync="tags" @update:value="updateTagFn" />
@@ -8,6 +7,7 @@
       <Budget :propA="1" @update:value="updateBudgetFn" />
       <!-- 绑定submit事件，当点击numberPad的OK时，触发这里面的submit事件，执行saveRecords函数 -->
       <numberPad @update:value="updateNumberPadFn" @submit="saveRecords" />
+      {{ recordList }}
     </layout>
   </div>
 </template>
@@ -19,8 +19,9 @@ import numberPad from "@/components/Money/NumberPad.vue";
 import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
 import { Component, Watch } from "vue-property-decorator";
+import { model } from "@/model";
 
-const model = require("@/model.js").default;
+// const model = require("@/model.ts");
 console.log(model.fetch());
 
 // 将从model抓取到的数据，赋值给recordList这个变量，这个变量也被定义为Record[]类型
@@ -28,13 +29,13 @@ let recordListFetched = model.fetch();
 console.log(`recordListFetched的类型： `, typeof recordListFetched);
 
 // 声明了一个类型
-type Record = {
-  tags: string[];
-  remark: string;
-  budget: string;
-  numberPad: number;
-  CreateDate: Date; // 类，即构造函数
-};
+// type RecordType = {
+//   tags: string[];
+//   remark: string;
+//   budget: string;
+//   numberPad: number;
+//   CreateDate: Date; // 类，即构造函数
+// };
 
 // 新增一个数据库，用作版本管理
 // window.localStorage.setItem("versionControl", "001");
@@ -45,7 +46,7 @@ export default class Money extends Vue {
   tags = ["衣", "食", "住", "行", "玩游戏"];
 
   // record是一个数据，它的类型是Record
-  record: Record = {
+  record: RecordType = {
     tags: [],
     remark: "",
     budget: "-",
@@ -54,7 +55,7 @@ export default class Money extends Vue {
   };
 
   // 数组里面都是Record类型
-  recordList: Record[] = recordListFetched;
+  recordList = recordListFetched;
 
   // 如果原来没有对应的localStorage，就会返回null，让其或为空数组，但因为在JSON.parse中，所以必须写上字符串空数组
   // recordList: Record[] = JSON.parse(localStorage.getItem("recordList") || "[]");
@@ -82,21 +83,14 @@ export default class Money extends Vue {
   }
 
   saveRecords() {
-    // 为深拷贝指定类型为Record,这样里面会自动有CreateDate属性
-    let deepCloneRecord: Record = JSON.parse(JSON.stringify(this.record));
-    deepCloneRecord.CreateDate = new Date();
-    // 将Record类型的record添加到数组中
-    console.log(`this.recordList: `, this.recordList);
-    console.log(`this.recordList typeof: `, typeof this.recordList);
-    console.log(`deepCloneRecord: `, deepCloneRecord);
-    this.recordList.push(deepCloneRecord);
-    console.log(this.recordList);
+    this.recordList.push(model.cloneRecordDeep(this.record));
   }
 
   @Watch("recordList")
   onRecordChange(newRecordList: string) {
     // 存入localStorage,将this.recordList转化为字符串
-    localStorage.setItem("recordList", JSON.stringify(this.recordList));
+    // localStorage.setItem("recordList", JSON.stringify(this.recordList));
+    model.save(this.recordList);
   }
 }
 </script>
