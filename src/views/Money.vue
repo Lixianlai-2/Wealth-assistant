@@ -1,11 +1,13 @@
 <template>
   <div>
-    {{ record }}
+    <!-- {{ record }} -->
     <layout contentClass="growTags" class-prefix="layout">
+      <!-- v-on的缩写就是@，用来绑定事件监听器 -->
       <Tags :dataSources.sync="tags" @update:value="updateTagFn" />
       <Remarker @update:value="updateRemarkFn" />
       <Budget :propA="1" @update:value="updateBudgetFn" />
-      <numberPad @update:value="updateNumberPadFn" />
+      <!-- 绑定submit事件，当点击numberPad的OK时，触发这里面的submit事件，执行saveRecords函数 -->
+      <numberPad @update:value="updateNumberPadFn" @submit="saveRecords" />
     </layout>
   </div>
 </template>
@@ -39,6 +41,9 @@ export default class Money extends Vue {
     numberPad: 0,
   };
 
+  // 数组里面都是Record类型
+  recordList: Record[] = [];
+
   updateTagFn(value: string[]) {
     console.log(value);
     this.record.tags = value;
@@ -55,6 +60,18 @@ export default class Money extends Vue {
   updateNumberPadFn(value: string) {
     console.log(value);
     this.record.numberPad = parseFloat(value); // 把传入的字符串变成数字
+  }
+
+  saveRecords() {
+    // 将Record类型的record添加到数组中
+    let deepCloneRecord = JSON.parse(JSON.stringify(this.record));
+    this.recordList.push(deepCloneRecord);
+  }
+
+  @Watch("record")
+  onRecordChange(newRecordList: string) {
+    // 存入localStorage,将this.recordList转化为字符串
+    localStorage.setItem("recordList", JSON.stringify(this.recordList));
   }
 }
 </script>
