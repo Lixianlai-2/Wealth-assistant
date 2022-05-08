@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- {{ recordList }} -->
+    {{ recordList }}
     <layout contentClass="growTags" class-prefix="layout">
       <!-- v-on的缩写就是@，用来绑定事件监听器 -->
       <Tags :dataSources.sync="tags" @update:value="updateTagFn" />
@@ -15,10 +15,17 @@
 <script lang="ts">
 import Vue from "vue";
 import Tags from "@/components/Money/Tags.vue";
-import numberPad from "@/components/Money/numberPad.vue";
+import numberPad from "@/components/Money/NumberPad.vue";
 import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
 import { Component, Watch } from "vue-property-decorator";
+
+const model = require("@/model.js").default;
+console.log(model.fetch());
+
+// 将从model抓取到的数据，赋值给recordList这个变量，这个变量也被定义为Record[]类型
+let recordListFetched = model.fetch();
+console.log(`recordListFetched的类型： `, typeof recordListFetched);
 
 // 声明了一个类型
 type Record = {
@@ -30,7 +37,7 @@ type Record = {
 };
 
 // 新增一个数据库，用作版本管理
-window.localStorage.setItem("versionControl", "001");
+// window.localStorage.setItem("versionControl", "001");
 
 // @Component
 @Component({ components: { Tags, Remarker, Budget, numberPad } })
@@ -47,10 +54,10 @@ export default class Money extends Vue {
   };
 
   // 数组里面都是Record类型
-  // recordList: Record[] = [];
+  recordList: Record[] = recordListFetched;
 
   // 如果原来没有对应的localStorage，就会返回null，让其或为空数组，但因为在JSON.parse中，所以必须写上字符串空数组
-  recordList: Record[] = JSON.parse(localStorage.getItem("recordList") || "[]");
+  // recordList: Record[] = JSON.parse(localStorage.getItem("recordList") || "[]");
 
   updateTagFn(value: string[]) {
     console.log(value);
@@ -79,6 +86,9 @@ export default class Money extends Vue {
     let deepCloneRecord: Record = JSON.parse(JSON.stringify(this.record));
     deepCloneRecord.CreateDate = new Date();
     // 将Record类型的record添加到数组中
+    console.log(`this.recordList: `, this.recordList);
+    console.log(`this.recordList typeof: `, typeof this.recordList);
+    console.log(`deepCloneRecord: `, deepCloneRecord);
     this.recordList.push(deepCloneRecord);
     console.log(this.recordList);
   }
