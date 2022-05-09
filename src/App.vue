@@ -27,7 +27,7 @@ export default {};
   font-family: $font-hei;
   // text-align: center;
   color: #333;
-  // background-color: $red;
+  background-color: #f4f4f4;
 }
 
 #nav {

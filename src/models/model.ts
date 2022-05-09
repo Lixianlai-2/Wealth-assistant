@@ -1,3 +1,5 @@
+// 这个model是用来处理Money.vue中的numberPad的
+
 let localStorageKeyName = "recordList";
 
 const model = {

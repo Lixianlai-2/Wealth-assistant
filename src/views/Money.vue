@@ -7,7 +7,6 @@
       <Budget :propA="1" @update:value="updateBudgetFn" />
       <!-- 绑定submit事件，当点击numberPad的OK时，触发这里面的submit事件，执行saveRecords函数 -->
       <numberPad @update:value="updateNumberPadFn" @submit="saveRecords" />
-      {{ recordList }}
     </layout>
   </div>
 </template>
@@ -19,31 +18,22 @@ import numberPad from "@/components/Money/NumberPad.vue";
 import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
 import { Component, Watch } from "vue-property-decorator";
-import { model } from "@/model";
+import { model } from "@/models/model";
+import { modelTagRecord } from "@/models/tagRecordModel";
 
 // const model = require("@/model.ts");
-console.log(model.fetch());
+// console.log(model.fetch());
 
 // 将从model抓取到的数据，赋值给recordList这个变量，这个变量也被定义为Record[]类型
 let recordListFetched = model.fetch();
-console.log(`recordListFetched的类型： `, typeof recordListFetched);
 
-// 声明了一个类型
-// type RecordType = {
-//   tags: string[];
-//   remark: string;
-//   budget: string;
-//   numberPad: number;
-//   CreateDate: Date; // 类，即构造函数
-// };
-
-// 新增一个数据库，用作版本管理
-// window.localStorage.setItem("versionControl", "001");
+const tagList = modelTagRecord.fetch();
+console.log(`tagList: `, tagList);
 
 // @Component
 @Component({ components: { Tags, Remarker, Budget, numberPad } })
 export default class Money extends Vue {
-  tags = ["衣", "食", "住", "行", "玩游戏"];
+  tags = tagList;
 
   // record是一个数据，它的类型是Record
   record: RecordType = {
@@ -56,9 +46,6 @@ export default class Money extends Vue {
 
   // 数组里面都是Record类型
   recordList = recordListFetched;
-
-  // 如果原来没有对应的localStorage，就会返回null，让其或为空数组，但因为在JSON.parse中，所以必须写上字符串空数组
-  // recordList: Record[] = JSON.parse(localStorage.getItem("recordList") || "[]");
 
   updateTagFn(value: string[]) {
     console.log(value);

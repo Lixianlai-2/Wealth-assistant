@@ -19,6 +19,9 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
+import { modelTagRecord } from "@/models/tagRecordModel";
+modelTagRecord.fetch();
+
 // selectedTags.indexOf(tag) >= 0
 @Component
 export default class tags extends Vue {
@@ -65,7 +68,9 @@ export default class tags extends Vue {
       this.$emit("update:dataSources", [...this.dataSources, result]);
     }
 
-    console.log(result);
+    modelTagRecord.create(result);
+
+    // console.log(result);
   }
 }
 </script>

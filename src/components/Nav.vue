@@ -2,17 +2,17 @@
   <nav>
     <!-- 下面是导航栏，通往不同的页面 -->
     <router-link to="/money" class="item" active-class="selected">
-      <icon iconName="money" />
+      <icon name="money" />
       记账
     </router-link>
 
     <router-link to="/labels" class="item" active-class="selected">
-      <icon iconName="label" />
+      <icon name="label" />
       标签
     </router-link>
 
     <router-link to="/statistics" class="item" active-class="selected">
-      <icon iconName="statistics" />
+      <icon name="statistics" />
       统计
     </router-link>
   </nav>

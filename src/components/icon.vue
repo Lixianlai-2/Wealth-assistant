@@ -2,7 +2,7 @@
   <div class="iconContainer">
     <svg class="iconStyle">
       <!-- 用v-bind之后，等号里面变成js表达式 -->
-      <use :xlink:href="'#' + iconName" />
+      <use :xlink:href="'#' + name" />
       <!-- 属性内部的插值已经被移除，无法再使用，只能用v-bind -->
       <!-- <use xlink:href="'#' + {{iconName}}" /> -->
     </svg>
@@ -24,7 +24,7 @@ try {
 
 export default Vue.extend({
   // 从父级组件引入设置的iconName
-  props: ["iconName"],
+  props: ["name"],
 });
 </script>
 
