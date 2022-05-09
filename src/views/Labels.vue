@@ -3,8 +3,8 @@
     <layout>
       {{ tags }}
       <ol class="tags">
-        <li v-for="tag in tags" :key="tag">
-          <span> {{ tag }}</span>
+        <li v-for="tag in tags" :key="tag.id">
+          <span> {{ tag.name }}</span>
           <icon name="right" />
         </li>
       </ol>
@@ -18,20 +18,21 @@
 <script lang="ts">
 // import Nav from "@/components/Nav.vue";
 import Vue from "vue";
-import { modelTagRecord } from "@/models/tagRecordModel";
+import { TagListModel } from "@/models/tagListModel";
+// import { TagListModel } from "@/models/tagListModel.vue";
 import Component from "vue-class-component";
 
 // 从localStorage中获得数据，保存到其中的data中
-modelTagRecord.fetch();
+TagListModel.fetch();
 
 @Component
 export default class Labels extends Vue {
-  tags = modelTagRecord.data;
+  tags = TagListModel.data;
   createTag() {
     const name = window.prompt("输入", "默认内容");
     if (name) {
-      // modelTagRecord.create(name);
-      const message = modelTagRecord.create(name);
+      // TagListModel.create(name);
+      const message = TagListModel.create(name);
       if (message === "success") {
         alert("添加成功");
       } else {

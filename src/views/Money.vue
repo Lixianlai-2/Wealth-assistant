@@ -19,7 +19,7 @@ import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
 import { Component, Watch } from "vue-property-decorator";
 import { model } from "@/models/model";
-import { modelTagRecord } from "@/models/tagRecordModel";
+import { TagListModel } from "@/models/tagListModel";
 
 // const model = require("@/model.ts");
 // console.log(model.fetch());
@@ -27,7 +27,7 @@ import { modelTagRecord } from "@/models/tagRecordModel";
 // 将从model抓取到的数据，赋值给recordList这个变量，这个变量也被定义为Record[]类型
 let recordListFetched = model.fetch();
 
-const tagList = modelTagRecord.fetch();
+const tagList = TagListModel.fetch();
 console.log(`tagList: `, tagList);
 
 // @Component

@@ -1,14 +1,20 @@
 let localStorageKeyName = "tagList";
 
-type TagListModel = {
-  data: string[]; // 包含字符串的数组
-  fetch: () => string[];
+// Tag类型的的对象
+type Tag = {
+  id: string;
+  name: string;
+};
+
+type TagList = {
+  data: Tag[]; // 包含对象的数组
+  fetch: () => Tag[];
   save: () => void;
   create: (name: string) => "success" | "duplicate";
 };
 
-const modelTagRecord: TagListModel = {
-  data: [],
+const TagListModel: TagList = {
+  data: [], //包含Tag类型对象的数组
 
   fetch() {
     this.data = JSON.parse(
@@ -26,17 +32,19 @@ const modelTagRecord: TagListModel = {
   },
 
   create(name) {
+    // 返回的内容形成一个新的数组
+    const names = this.data.map((item) => item.name); // 包含string的数组
     // 如果标签中有重复的
-    if (this.data.indexOf(name) >= 0) {
+    if (names.indexOf(name) >= 0) {
       return "duplicate";
     } else {
       // 没有重复的就添加到data中
-      this.data.push(name);
+      this.data.push({ id: name, name: name });
       this.save();
       return "success";
     }
   },
 };
 
-export { modelTagRecord };
+export { TagListModel };
 // 暴露模块

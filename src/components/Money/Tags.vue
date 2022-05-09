@@ -19,8 +19,8 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
-import { modelTagRecord } from "@/models/tagRecordModel";
-modelTagRecord.fetch();
+import { TagListModel } from "@/models/tagListModel";
+TagListModel.fetch();
 
 // selectedTags.indexOf(tag) >= 0
 @Component
@@ -69,7 +69,7 @@ export default class tags extends Vue {
     }
 
     // 存储新增的数据
-    modelTagRecord.create(result);
+    TagListModel.create(result);
   }
 }
 </script>
