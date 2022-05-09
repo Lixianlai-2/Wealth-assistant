@@ -34,7 +34,7 @@ export default class Labels extends Vue {
       // TagListModel.create(name);
       const message = TagListModel.create(name);
       if (message === "success") {
-        alert("添加成功");
+        console.log("添加成功");
       } else {
         alert("标签不能重复哦");
       }
