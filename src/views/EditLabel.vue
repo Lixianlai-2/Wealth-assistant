@@ -13,7 +13,10 @@ export default class EditLabel extends Vue {
   created() {
     // 得到edit/路径id
     // 后面与从数据库中得到的内容对比跳转
+
+    console.log("无论edit后面的数字是几，这里都可以运行");
     const id = this.$route.params.id;
+
     TagListModel.fetch();
 
     // tags是包含Tag类型的数组，而Tag是对象
