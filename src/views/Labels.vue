@@ -19,40 +19,23 @@
 // import Nav from "@/components/Nav.vue";
 import Vue from "vue";
 import { modelTagRecord } from "@/models/tagRecordModel";
-import { model } from "@/models/model";
+import Component from "vue-class-component";
+
 // 从localStorage中获得数据，保存到其中的data中
-// model.fetch();
-console.log(modelTagRecord.data);
+modelTagRecord.fetch();
 
+@Component
 export default class Labels extends Vue {
-  // createTag() {
-  //   const name = window.prompt("输入", "默认内容");
-  //   if (name) {
-  //     // modelTagRecord.create(name);
-  //     const message = modelTagRecord.create(name);
-  //     if (message === "success") {
-  //       alert("添加成功");
-  //     } else {
-  //       alert("标签不能重复哦");
-  //     }
-  //   }
-  //   this.tags = modelTagRecord.data;
-  // }
-
-  // // 直接读取data的数据
-  // tags = modelTagRecord.data;
-
   tags = modelTagRecord.data;
-
   createTag() {
-    const name = window.prompt("请输出标签名");
-    alert(name);
+    const name = window.prompt("输入", "默认内容");
     if (name) {
+      // modelTagRecord.create(name);
       const message = modelTagRecord.create(name);
-      if (message === "duplicate") {
-        window.alert("标签名重复了");
-      } else if (message === "success") {
-        window.alert("添加成功");
+      if (message === "success") {
+        alert("添加成功");
+      } else {
+        alert("标签不能重复哦");
       }
     }
   }
