@@ -68,9 +68,8 @@ export default class tags extends Vue {
       this.$emit("update:dataSources", [...this.dataSources, result]);
     }
 
+    // 存储新增的数据
     modelTagRecord.create(result);
-
-    // console.log(result);
   }
 }
 </script>
