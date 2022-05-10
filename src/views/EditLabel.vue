@@ -2,7 +2,7 @@
   <div>
     <layout>
       <div class="navBar">
-        <icon class="leftIcon" name="left"></icon>
+        <icon class="leftIcon" name="left" @click.native="goBack"></icon>
         <span class="title">编辑标签</span>
         <span class="rightIcon"></span>
       </div>
@@ -12,12 +12,13 @@
           :value="tag.name"
           fieldName="标签名"
           holderName="请输入标签"
+          @update:value="updateTag"
         />
       </div>
 
       <div class="button-wrapper">
         <!-- <Button>删除标签</Button> -->
-        <Button @click.native="deleteTag">删除标签</Button>
+        <Button @click.native="removeTag">删除标签</Button>
       </div>
     </layout>
   </div>
@@ -38,7 +39,7 @@ import Button from "../components/Money/Button.vue";
 })
 export default class EditLabel extends Vue {
   tag?: { id: string; name: string } = undefined;
-  // tag: Tag = undefined;
+  // tag = undefined;
 
   created() {
     // 得到edit/路径id
@@ -59,25 +60,26 @@ export default class EditLabel extends Vue {
     }
   }
 
+  updateTag(name: string) {
+    if (this.tag) {
+      TagListModel.update(this.tag.id, name);
+    }
+  }
+
+  removeTag() {
+    alert("removeTag works");
+    TagListModel.remove(this.tag.id);
+    this.$router.back();
+  }
+
   deleteTag() {
     alert("delete 生效了");
   }
+
+  goBack() {
+    this.$router.back();
+  }
 }
-// tag?: { id: string; name: string } = undefined;
-
-//   created() {
-//     const id = this.$route.params.id;
-//     TagListModel.fetch();
-//     const tags = TagListModel.data;
-//     const tag = tags.filter((t) => t.id === id)[0];
-//     if (tag) {
-//       this.tag = tag;
-//     } else {
-//       this.$router.replace("/404");
-//     }
-//   }
-
-// }
 </script>
 
 <style lang="scss" scoped>

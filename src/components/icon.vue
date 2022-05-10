@@ -1,5 +1,5 @@
 <template>
-  <svg class="iconStyle">
+  <svg class="iconStyle" @click="$emit('click', $event)">
     <!-- 用v-bind之后，等号里面变成js表达式 -->
     <use :xlink:href="'#' + name" />
     <!-- 属性内部的插值已经被移除，无法再使用，只能用v-bind -->

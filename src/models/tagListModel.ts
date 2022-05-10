@@ -11,6 +11,8 @@ type TagList = {
   fetch: () => Tag[];
   save: () => void;
   create: (name: string) => "success" | "duplicate";
+  update: (id: string, name: string) => "success" | "not found" | "duplicate";
+  remove: (id: string) => boolean;
 };
 
 const TagListModel: TagList = {
@@ -43,6 +45,51 @@ const TagListModel: TagList = {
       this.save();
       return "success";
     }
+  },
+
+  update(id, name) {
+    // 返回对象的id数据
+    const idList = this.data.map((item) => item.id);
+    // 如果用户传入的id（也就是页面上edit/路径id)存在于数据库，执行下面的操作
+    if (idList.indexOf(id) >= 0) {
+      const names = this.data.map((item) => item.name);
+      // 如果用户传入的name跟数据库的name一样
+      if (names.indexOf(name) >= 0) {
+        return "duplicate";
+      } else {
+        // 参数id跟数据库中的id相同的那个对象
+        const tag = this.data.filter((item) => item.id === id)[0];
+        // 改变同一个id的那个对象的name属性，也就是传入新的值，因为地址相同，所以相当于this.data中的响应数据也改变了
+        tag.name = name;
+        // 这就在修改id了
+        tag.id = name;
+        // 保存this.data中修改的数据，也就是将用户输入的input内容记录到数据库总
+        this.save();
+
+        return "success";
+      }
+    } else {
+      return "not found";
+    }
+  },
+
+  remove(id) {
+    // 这里设置为-1是为了避免后面的splice起作用
+    let index = -1;
+    for (let i = 0; i < this.data.length; i++) {
+      // 判断参数id跟数据库中id是否相等，如果相等，让index等于i,也就是得到相同id位置的index
+      if (this.data[i].id === id) {
+        index = i;
+        break;
+      }
+    }
+    console.log("index", index);
+
+    // 根据index删除那个数据对象
+    this.data.splice(index, 1);
+    // 保存数据
+    this.save();
+    return true;
   },
 };
 
