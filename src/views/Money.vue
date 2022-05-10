@@ -3,7 +3,7 @@
     <layout contentClass="growTags" class-prefix="layout">
       <!-- v-on的缩写就是@，用来绑定事件监听器 -->
       <Tags :dataSources.sync="tags" @update:value="updateTagFn" />
-      <Remarker @update:value="updateRemarkFn" />
+      <Remarker fieldName="备注" @update:value="updateRemarkFn" />
       <Budget :propA="1" @update:value="updateBudgetFn" />
       <!-- 绑定submit事件，当点击numberPad的OK时，触发这里面的submit事件，执行saveRecords函数 -->
       <numberPad @update:value="updateNumberPadFn" @submit="saveRecords" />
@@ -30,7 +30,7 @@ let recordListFetched = model.fetch();
 const tagList = TagListModel.fetch();
 console.log(`tagList: `, tagList);
 
-// @Component
+// 注册组件
 @Component({ components: { Tags, Remarker, Budget, numberPad } })
 export default class Money extends Vue {
   tags = tagList;

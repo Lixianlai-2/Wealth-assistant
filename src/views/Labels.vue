@@ -14,7 +14,8 @@
         </router-link>
       </div>
       <div class="tagBtnContainer">
-        <button @click="createTag" class="newTag">新增标签</button>
+        <Button @click.native="createTag">新建标签</Button>
+        <!--        <Button class="newTag" @click="createTag">新建标签</Button>-->
       </div>
     </layout>
   </div>
@@ -25,12 +26,14 @@
 import Vue from "vue";
 import { TagListModel } from "@/models/tagListModel";
 // import { TagListModel } from "@/models/tagListModel.vue";
-import Component from "vue-class-component";
+import { Component } from "vue-property-decorator";
+import Button from "@/components/Money/Button.vue";
 
 // 从localStorage中获得数据，保存到其中的data中
 TagListModel.fetch();
-
-@Component
+@Component({
+  components: { Button },
+})
 export default class Labels extends Vue {
   tags = TagListModel.data;
   createTag() {

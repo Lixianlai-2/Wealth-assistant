@@ -3,9 +3,9 @@
     <!-- 下面用以测试数据绑定是否实现 -->
     {{ value }}
     <label class="labelRemark">
-      <span class="RemarkText">备注</span>
+      <span class="RemarkText">{{ fieldName }}</span>
       <!-- v-model实现数据双向绑定 -->
-      <input type="text" placeholder="在这里输入备注" v-model="value" />
+      <input type="text" :placeholder="holderName" v-model="value" />
     </label>
   </div>
 </template>
@@ -13,12 +13,18 @@
 <script lang="ts">
 import Vue from "vue";
 
-import { Component, Watch } from "vue-property-decorator";
+import { Component, Watch, Prop } from "vue-property-decorator";
 
 @Component
 export default class remark extends Vue {
   name: "Remarker" | undefined;
   value = "";
+  // span的名字
+  @Prop({ required: true }) fieldName!: string;
+  // @Prop({ default: true }) fieldName!: string;
+
+  // placeholder
+  @Prop() holderName!: string;
 
   // 检测value值的变化，如果变化了，就触发update:value事件
   @Watch("value")
