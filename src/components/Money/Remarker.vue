@@ -5,7 +5,12 @@
     <label class="labelRemark">
       <span class="RemarkText">{{ fieldName }}</span>
       <!-- v-model实现数据双向绑定 -->
-      <input type="text" :placeholder="holderName" v-model="value" />
+      <input
+        type="text"
+        :value="value"
+        @input="onValueChange($event.target.value)"
+        :placeholder="holderName"
+      />
     </label>
   </div>
 </template>
@@ -19,7 +24,7 @@ import { Component, Watch, Prop } from "vue-property-decorator";
 export default class remark extends Vue {
   name: "Remarker" | undefined;
   // value = "";
-  @Prop({ default: "" }) value!: string;
+  @Prop({ default: "" }) readonly value!: string;
 
   // span的名字
   @Prop({ required: true }) fieldName!: string;
