@@ -6,11 +6,11 @@
     <ul>
       <li
         v-for="tag in dataSources"
-        :key="tag"
+        :key="tag.id"
         @click="toggle(tag)"
         :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
       >
-        {{ tag }}
+        {{ tag.name }}
       </li>
     </ul>
   </div>
@@ -66,6 +66,7 @@ export default class tags extends Vue {
         return;
       }
       this.$emit("update:dataSources", [...this.dataSources, result]);
+      console.log([...this.dataSources]);
     }
 
     // 存储新增的数据

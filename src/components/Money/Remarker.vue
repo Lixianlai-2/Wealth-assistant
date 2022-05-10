@@ -18,7 +18,9 @@ import { Component, Watch, Prop } from "vue-property-decorator";
 @Component
 export default class remark extends Vue {
   name: "Remarker" | undefined;
-  value = "";
+  // value = "";
+  @Prop({ default: "" }) value!: string;
+
   // span的名字
   @Prop({ required: true }) fieldName!: string;
   // @Prop({ default: true }) fieldName!: string;
