@@ -7,10 +7,16 @@
         <span class="rightIcon"></span>
       </div>
       <div class="Remarker-wrapper">
-        <Remarker fieldName="标签名" holderName="请输入标签" />
+        <Remarker
+          class="remark"
+          :value="tag.name"
+          fieldName="标签名"
+          holderName="请输入标签"
+        />
       </div>
 
       <div class="button-wrapper">
+        <!-- <Button>删除标签</Button> -->
         <Button @click.native="deleteTag">删除标签</Button>
       </div>
     </layout>
@@ -31,10 +37,47 @@ import Button from "../components/Money/Button.vue";
   },
 })
 export default class EditLabel extends Vue {
+  tag?: { id: string; name: string } = undefined;
+  // tag: Tag = undefined;
+
+  created() {
+    // 得到edit/路径id
+    // 后面与从数据库中得到的内容对比跳转
+    console.log("无论edit后面的数字是几，这里都可以运行");
+    const id = this.$route.params.id;
+    TagListModel.fetch();
+    // tags是包含Tag类型的数组，而Tag是对象
+    const tags = TagListModel.data;
+    // 得到路径id与数据库id相等的那个对象（也就是Tag类型）
+    const tag = tags.filter((tag) => tag.id === id)[0];
+    if (tag) {
+      console.log(tag);
+      this.tag = tag;
+    } else {
+      // 如果没有合适的就跳转到404页面
+      this.$router.replace("/404");
+    }
+  }
+
   deleteTag() {
     alert("delete 生效了");
   }
 }
+// tag?: { id: string; name: string } = undefined;
+
+//   created() {
+//     const id = this.$route.params.id;
+//     TagListModel.fetch();
+//     const tags = TagListModel.data;
+//     const tag = tags.filter((t) => t.id === id)[0];
+//     if (tag) {
+//       this.tag = tag;
+//     } else {
+//       this.$router.replace("/404");
+//     }
+//   }
+
+// }
 </script>
 
 <style lang="scss" scoped>
@@ -59,8 +102,13 @@ export default class EditLabel extends Vue {
   }
 }
 .Remarker-wrapper {
-  background: white;
+  // border: 1px solid red;
   margin-top: 8px;
+}
+
+.remark {
+  // border: 10px solid blue;
+  background: white;
 }
 
 .button-wrapper {

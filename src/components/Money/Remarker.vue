@@ -1,18 +1,14 @@
 <template>
-  <div>
-    <!-- 下面用以测试数据绑定是否实现 -->
-    {{ value }}
-    <label class="labelRemark">
-      <span class="RemarkText">{{ fieldName }}</span>
-      <!-- v-model实现数据双向绑定 -->
-      <input
-        type="text"
-        :value="value"
-        @input="onValueChange($event.target.value)"
-        :placeholder="holderName"
-      />
-    </label>
-  </div>
+  <label class="labelRemark">
+    <span class="RemarkText">{{ fieldName }}</span>
+    <!-- v-model实现数据双向绑定 -->
+    <input
+      type="text"
+      :value="value"
+      @input="onValueChange($event.target.value)"
+      :placeholder="holderName"
+    />
+  </label>
 </template>
 
 <script lang="ts">
@@ -54,7 +50,7 @@ export default class remark extends Vue {
     // padding: 10px;
   }
   input {
-    height: 64px;
+    height: 40px;
     flex-grow: 1;
     background: transparent;
     border: none;

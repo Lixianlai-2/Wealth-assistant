@@ -3,6 +3,11 @@ declare module "*.svg" {
   export default content;
 }
 
+const Tag = {
+  id: string,
+  name: string,
+};
+
 type RecordType = {
   tags: string[];
   remark: string;
