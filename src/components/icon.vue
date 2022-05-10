@@ -1,12 +1,10 @@
 <template>
-  <div class="iconContainer">
-    <svg class="iconStyle">
-      <!-- 用v-bind之后，等号里面变成js表达式 -->
-      <use :xlink:href="'#' + name" />
-      <!-- 属性内部的插值已经被移除，无法再使用，只能用v-bind -->
-      <!-- <use xlink:href="'#' + {{iconName}}" /> -->
-    </svg>
-  </div>
+  <svg class="iconStyle">
+    <!-- 用v-bind之后，等号里面变成js表达式 -->
+    <use :xlink:href="'#' + name" />
+    <!-- 属性内部的插值已经被移除，无法再使用，只能用v-bind -->
+    <!-- <use xlink:href="'#' + {{iconName}}" /> -->
+  </svg>
 </template>
 
 <script lang="ts">
@@ -30,8 +28,8 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .iconStyle {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;

@@ -10,12 +10,12 @@
           class="tag"
         >
           <span> {{ tag.name }}</span>
-          <icon name="right" />
+          <icon class="icon" name="right"></icon>
         </router-link>
       </div>
       <div class="tagBtnContainer">
         <Button @click.native="createTag">新建标签</Button>
-        <!--        <Button class="newTag" @click="createTag">新建标签</Button>-->
+        <!--  <Button class="newTag" @click="createTag">新建标签</Button>-->
       </div>
     </layout>
   </div>
@@ -28,6 +28,7 @@ import { TagListModel } from "@/models/tagListModel";
 // import { TagListModel } from "@/models/tagListModel.vue";
 import { Component } from "vue-property-decorator";
 import Button from "@/components/Money/Button.vue";
+// import icon from "@/components/icon.vue";
 
 // 从localStorage中获得数据，保存到其中的data中
 TagListModel.fetch();
@@ -64,8 +65,6 @@ export default class Labels extends Vue {
     justify-content: space-between;
     border-bottom: 1px solid #e4e4e4;
     svg {
-      border: 1px solid blue;
-      color: red;
     }
   }
 }
