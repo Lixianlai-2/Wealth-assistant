@@ -18,7 +18,7 @@
 
       <div class="button-wrapper">
         <!-- <Button>删除标签</Button> -->
-        <Button @click.native="removeTag">删除标签</Button>
+        <Button @click.native="remove">删除标签</Button>
       </div>
     </layout>
   </div>
@@ -66,11 +66,14 @@ export default class EditLabel extends Vue {
     }
   }
 
-  removeTag() {
+  remove() {
     alert("removeTag works");
     if (this.tag) {
-      // 如果删除成功了就退回
-      if (TagListModel.remove(this.tag.id)) this.$router.back();
+      if (window.removeTag(this.tag.id)) {
+        this.$router.back();
+      } else {
+        alert("删除失败");
+      }
     }
   }
 

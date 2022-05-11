@@ -8,10 +8,6 @@ const Tag = {
   name: string,
 };
 
-interface Window {
-  tagList: Tag[];
-}
-
 type TagListType = {
   data: Tag[]; // 包含对象的数组
   fetch: () => Tag[];
@@ -28,3 +24,13 @@ type RecordType = {
   numberPad: number;
   CreateDate?: Date; // 类，即构造函数
 };
+
+interface Window {
+  tagList: Tag[];
+  createTag: (name: string) => void;
+  removeTag: (id: string) => boolean;
+  updateTag: (
+    id: string,
+    name: string
+  ) => "success" | "not found" | "duplicate";
+}

@@ -14,7 +14,7 @@
         </router-link>
       </div>
       <div class="tagBtnContainer">
-        <Button @click.native="createTag">新建标签</Button>
+        <Button @click.native="create">新建标签</Button>
         <!--  <Button class="newTag" @click="createTag">新建标签</Button>-->
       </div>
     </layout>
@@ -37,16 +37,11 @@ TagListModel.fetch();
 })
 export default class Labels extends Vue {
   tags = window.tagList;
-  createTag() {
-    const name = window.prompt("输入", "默认内容");
+
+  create() {
+    const name = window.prompt("请输入您要添加的标签");
     if (name) {
-      // TagListModel.create(name);
-      const message = TagListModel.create(name);
-      if (message === "success") {
-        console.log("添加成功");
-      } else {
-        alert("标签不能重复哦");
-      }
+      window.createTag(name);
     }
   }
 }
