@@ -1,3 +1,4 @@
+import createId from "@/lip/idCreator";
 let localStorageKeyName = "tagList";
 
 // Tag类型的的对象
@@ -34,17 +35,20 @@ const TagListModel: TagList = {
   },
 
   create(name) {
-    // 返回的内容形成一个新的数组
-    const names = this.data.map((item) => item.name); // 包含string的数组
-    // 如果标签中有重复的
+    // 返回的内容形成一个新的数组,里面都是name字符串
+    const names = this.data.map((obj) => obj.name);
+    // 如果用户输入的标签name在数据库中已经存在了
     if (names.indexOf(name) >= 0) {
       return "duplicate";
-    } else {
-      // 没有重复的就添加到data中
-      this.data.push({ id: name, name: name });
-      this.save();
-      return "success";
     }
+
+    // 把number变成字符串数字
+    const id = createId().toString();
+
+    // 没有重复的就添加到data中
+    this.data.push({ id: id, name: name });
+    this.save();
+    return "success";
   },
 
   update(id, name) {
@@ -62,7 +66,7 @@ const TagListModel: TagList = {
         // 改变同一个id的那个对象的name属性，也就是传入新的值，因为地址相同，所以相当于this.data中的响应数据也改变了
         tag.name = name;
         // 这就在修改id了
-        tag.id = name;
+        // tag.id = name;
         // 保存this.data中修改的数据，也就是将用户输入的input内容记录到数据库总
         this.save();
 

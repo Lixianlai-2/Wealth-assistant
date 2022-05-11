@@ -68,8 +68,10 @@ export default class EditLabel extends Vue {
 
   removeTag() {
     alert("removeTag works");
-    TagListModel.remove(this.tag.id);
-    this.$router.back();
+    if (this.tag) {
+      // 如果删除成功了就退回
+      if (TagListModel.remove(this.tag.id)) this.$router.back();
+    }
   }
 
   deleteTag() {
