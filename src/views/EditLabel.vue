@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from "vue-property-decorator";
-import { TagListModel } from "@/models/tagListModel";
+
 // import Remarker from "@/components/Money/Remarker.vue";
 import Remarker from "../components/Money/Remarker.vue";
 import Button from "../components/Money/Button.vue";
@@ -47,9 +47,9 @@ export default class EditLabel extends Vue {
     // 无论edit后面的数字是几，这里都可以运行
 
     const id = this.$route.params.id;
-    TagListModel.fetch();
+
     // tags是包含Tag类型的数组，而Tag是对象
-    const tags = TagListModel.data;
+    const tags = window.tagList;
     // 得到路径id与数据库id相等的那个对象（也就是Tag类型）
     const tag = tags.filter((tag) => tag.id === id)[0];
     if (tag) {
@@ -62,7 +62,7 @@ export default class EditLabel extends Vue {
 
   updateTag(name: string) {
     if (this.tag) {
-      TagListModel.update(this.tag.id, name);
+      window.updateTag(this.tag.id, name);
     }
   }
 

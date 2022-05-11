@@ -19,8 +19,6 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
-import { TagListModel } from "@/models/tagListModel";
-TagListModel.fetch();
 
 // selectedTags.indexOf(tag) >= 0
 @Component
@@ -38,6 +36,7 @@ export default class tags extends Vue {
     // 显示一个对话框，对话框中包含一条文字信息，用来提示用户输入文字
     // result = window.prompt(text, value);
     let result = window.prompt("新增标签");
+    if (result) window.createTag(result);
 
     if (result === "") {
       alert("输入不能为空哟");
@@ -53,18 +52,8 @@ export default class tags extends Vue {
         return;
       }
 
-      console.log(`用户输入的内容  `, result);
-
       this.$emit("update:dataSources", [...this.dataSources, result]);
-      console.log(`this.dataSources`, this.dataSources);
-      console.log([...this.dataSources, result]);
     }
-
-    // 存储新增的数据，生成新的tag类型，为用户输入的result自动匹配了id，在this.data中形成了新的数组
-    TagListModel.create(result);
-    // dataSources就立刻变化了，新增了一个对象，其中的name就是用户传入的字符串
-    // console.log(this.dataSources);
-    // console.log(TagListModel.data);
   }
 
   // 把对应的tag添加到selectedTags数组中，或从中删除，以实现selected：true或selected:false

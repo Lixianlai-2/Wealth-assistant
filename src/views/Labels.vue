@@ -22,16 +22,13 @@
 </template>
 
 <script lang="ts">
-// import Nav from "@/components/Nav.vue";
 import Vue from "vue";
-import { TagListModel } from "@/models/tagListModel";
-// import { TagListModel } from "@/models/tagListModel.vue";
 import { Component } from "vue-property-decorator";
 import Button from "@/components/Money/Button.vue";
 // import icon from "@/components/icon.vue";
 
 // 从localStorage中获得数据，保存到其中的data中
-TagListModel.fetch();
+
 @Component({
   components: { Button },
 })
