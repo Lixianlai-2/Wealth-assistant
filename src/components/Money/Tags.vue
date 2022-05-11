@@ -60,8 +60,11 @@ export default class tags extends Vue {
       console.log([...this.dataSources, result]);
     }
 
-    // 存储新增的数据，这一步没有问题，因为标签页面的新增客源用
+    // 存储新增的数据，生成新的tag类型，为用户输入的result自动匹配了id，在this.data中形成了新的数组
     TagListModel.create(result);
+    // dataSources就立刻变化了，新增了一个对象，其中的name就是用户传入的字符串
+    console.log(this.dataSources);
+    console.log(TagListModel.data);
   }
 
   // 把对应的tag添加到selectedTags数组中，或从中删除，以实现selected：true或selected:false

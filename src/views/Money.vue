@@ -35,7 +35,9 @@ let recordListFetched = recordListModel.fetch();
 // 注册组件
 @Component({ components: { Tags, Remarker, Budget, numberPad } })
 export default class Money extends Vue {
+  // 让money部分的标签和Labels部分的标签都来自同一个地方，一个地方修改，另一个地方就都修改了！
   fetchedTags = window.tagList;
+  // fetchedTags = TagListModel.fetch();
 
   // record是一个数据，它的类型是Record
   record: RecordType = {
