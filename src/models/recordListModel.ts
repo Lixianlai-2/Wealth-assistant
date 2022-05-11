@@ -2,7 +2,8 @@
 
 let localStorageKeyName = "recordList";
 
-const model = {
+const recordListModel = {
+  data: [] as RecordType[],
   fetch() {
     const x = JSON.parse(
       window.localStorage.getItem(localStorageKeyName) || "[]"
@@ -21,11 +22,12 @@ const model = {
     deepCloneRecord.CreateDate = new Date();
     return deepCloneRecord; //记得return
   },
+  create(record: RecordType) {
+    const record2: RecordType = this.cloneRecordDeep(record);
+    record2.CreateDate = new Date();
+    this.data.push(record2);
+  },
 };
 
-console.log(typeof model.fetch());
-
-export { model };
 // 暴露模块
-
-// export { model };
+export { recordListModel };

@@ -30,7 +30,7 @@ export default class remark extends Vue {
   @Prop() holderName!: string;
 
   // 检测value值的变化，如果变化了，就触发update:value事件
-  @Watch("value")
+  // @Watch("value")
   onValueChange(value: string) {
     this.$emit("update:value", value);
   }

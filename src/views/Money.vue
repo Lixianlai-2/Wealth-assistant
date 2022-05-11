@@ -2,7 +2,7 @@
   <div>
     <layout contentClass="growTags" class-prefix="layout">
       <!-- v-on的缩写就是@，用来绑定事件监听器 -->
-      <Tags :dataSources.sync="tags" @update:value="updateTagFn" />
+      <Tags :dataSources="fetchedTags" @update:value="updateTagFn" />
       <Remarker
         value="Money组件设置的内容"
         fieldName="备注"
@@ -22,20 +22,20 @@ import numberPad from "@/components/Money/NumberPad.vue";
 import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
 import { Component, Watch } from "vue-property-decorator";
-import { model } from "@/models/model";
+import { recordListModel } from "@/models/recordListModel";
 import { TagListModel } from "@/models/tagListModel";
 
 // const model = require("@/model.ts");
 
 // 将从model抓取到的数据，赋值给recordList这个变量，这个变量也被定义为Record[]类型
-let recordListFetched = model.fetch();
+let recordListFetched = recordListModel.fetch();
 
-const tagList = TagListModel.fetch();
+// const tagList = TagListModel.fetch();
 
 // 注册组件
 @Component({ components: { Tags, Remarker, Budget, numberPad } })
 export default class Money extends Vue {
-  tags = tagList;
+  fetchedTags = window.tagList;
 
   // record是一个数据，它的类型是Record
   record: RecordType = {
@@ -50,6 +50,8 @@ export default class Money extends Vue {
   recordList = recordListFetched;
 
   updateTagFn(value: string[]) {
+    console.log("更新tag数据works");
+    console.log(`money组件得到的新建标签所传来的 value:`, value);
     this.record.tags = value;
   }
 
@@ -67,14 +69,13 @@ export default class Money extends Vue {
   }
 
   saveRecords() {
-    this.recordList.push(model.cloneRecordDeep(this.record));
+    this.recordList.push(recordListModel.cloneRecordDeep(this.record));
+    alert("点击OK生效了");
   }
 
   @Watch("recordList")
-  onRecordChange(newRecordList: string) {
-    // 存入localStorage,将this.recordList转化为字符串
-    // localStorage.setItem("recordList", JSON.stringify(this.recordList));
-    model.save(this.recordList);
+  onRecordChange() {
+    recordListModel.save(this.recordList);
   }
 }
 </script>

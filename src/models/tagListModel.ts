@@ -1,22 +1,7 @@
 import createId from "@/lip/idCreator";
 let localStorageKeyName = "tagList";
 
-// Tag类型的的对象
-type Tag = {
-  id: string;
-  name: string;
-};
-
-type TagList = {
-  data: Tag[]; // 包含对象的数组
-  fetch: () => Tag[];
-  save: () => void;
-  create: (name: string) => "success" | "duplicate";
-  update: (id: string, name: string) => "success" | "not found" | "duplicate";
-  remove: (id: string) => boolean;
-};
-
-const TagListModel: TagList = {
+const TagListModel: TagListType = {
   data: [], //包含Tag类型对象的数组
 
   fetch() {
@@ -87,7 +72,6 @@ const TagListModel: TagList = {
         break;
       }
     }
-    console.log("index", index);
 
     // 根据index删除那个数据对象
     this.data.splice(index, 1);

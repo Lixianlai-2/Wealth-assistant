@@ -9,6 +9,7 @@
 import Vue from "vue";
 import layout from "@/components/layout.vue";
 import icon from "@/components/icon.vue";
+import { TagListModel } from "./models/tagListModel";
 
 // 全局注册组件layout
 Vue.component("layout", layout);
