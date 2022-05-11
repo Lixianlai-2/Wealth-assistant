@@ -1,4 +1,5 @@
 // 这个model是用来处理Money.vue中的numberPad的
+import clone from "@/lip/clone";
 
 let localStorageKeyName = "recordList";
 
@@ -23,9 +24,10 @@ const recordListModel = {
     return deepCloneRecord; //记得return
   },
   create(record: RecordType) {
-    const record2: RecordType = this.cloneRecordDeep(record);
+    const record2: RecordType = clone(record);
     record2.CreateDate = new Date();
-    this.data.push(record2);
+    // 直接得到fetch后的数据，直接读取this.data那么就是空数组
+    this.fetch().push(record2);
   },
 };
 

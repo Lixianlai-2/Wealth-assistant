@@ -71,7 +71,8 @@ export default class Money extends Vue {
   }
 
   saveRecords() {
-    this.recordList.push(recordListModel.cloneRecordDeep(this.record));
+    // this.recordList.push(recordListModel.cloneRecordDeep(this.record));
+    recordListModel.create(this.record);
     alert("点击OK生效了");
   }
 
