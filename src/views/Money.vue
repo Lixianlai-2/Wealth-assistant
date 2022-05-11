@@ -26,13 +26,11 @@ import { model } from "@/models/model";
 import { TagListModel } from "@/models/tagListModel";
 
 // const model = require("@/model.ts");
-// console.log(model.fetch());
 
 // 将从model抓取到的数据，赋值给recordList这个变量，这个变量也被定义为Record[]类型
 let recordListFetched = model.fetch();
 
 const tagList = TagListModel.fetch();
-console.log(`tagList: `, tagList);
 
 // 注册组件
 @Component({ components: { Tags, Remarker, Budget, numberPad } })
@@ -52,24 +50,19 @@ export default class Money extends Vue {
   recordList = recordListFetched;
 
   updateTagFn(value: string[]) {
-    console.log(value);
     this.record.tags = value;
   }
 
   updateRemarkFn(value: string) {
-    console.log(value);
     this.record.remark = value;
   }
   updateBudgetFn(value: string) {
-    // console.log(value);
     this.record.budget = value;
-    console.log(localStorage.getItem("recordList"));
   }
   updateNumberPadFn(value: string) {
-    console.log(value);
     this.record.numberPad = parseFloat(value); // 把传入的字符串变成数字
     let currentTime = new Date();
-    console.log(currentTime.toLocaleTimeString());
+
     // this.record.CreateDate = currentTime.toLocaleTimeString;
   }
 
