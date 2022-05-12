@@ -21,11 +21,7 @@ import Tags from "@/components/Money/Tags.vue";
 import numberPad from "@/components/Money/NumberPad.vue";
 import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
-import { Component, Watch } from "vue-property-decorator";
-import { recordListModel } from "@/models/recordListModel";
-
-// 将从model抓取到的数据，赋值给recordList这个变量，这个变量也被定义为Record[]类型
-let recordListFetched = window.recordList;
+import { Component } from "vue-property-decorator";
 
 // 注册组件
 @Component({ components: { Tags, Remarker, Budget, numberPad } })
@@ -43,7 +39,8 @@ export default class Money extends Vue {
   };
 
   // 数组里面都是Record类型
-  recordList = recordListFetched;
+  recordList = window.recordList;
+  // recordList = recordListFetched;
 
   updateTagFn(value: string[]) {
     console.log("更新tag数据works");
