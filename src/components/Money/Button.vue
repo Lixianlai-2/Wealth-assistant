@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <!-- 触发click事件，前提是引入的那个地方本身就有事件 -->
-    <!-- <button class="newTag" @click="$emit('click', $event)"> -->
-    <button class="newTag">
-      <slot />
-    </button>
-  </div>
+  <!-- 触发click事件，前提是引入的那个地方本身就有事件 -->
+  <!-- <button class="newTag" @click="$emit('click', $event)"> -->
+  <button class="newTag">
+    <slot />
+  </button>
 </template>
 
 <script lang="ts">
