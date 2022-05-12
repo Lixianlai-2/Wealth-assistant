@@ -2,7 +2,7 @@
   <div>
     <layout contentClass="growTags" class-prefix="layout">
       <!-- v-on的缩写就是@，用来绑定事件监听器 -->
-      <Tags :dataSources="fetchedTags" @update:value="updateTagFn" />
+      <Tags @update:value="updateTagFn" />
       <Remarker
         value="在这儿备注"
         fieldName="备注"

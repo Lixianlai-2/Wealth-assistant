@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from "vue-property-decorator";
+import { Vue, Component } from "vue-property-decorator";
 
 // import Remarker from "@/components/Money/Remarker.vue";
 import Remarker from "../components/Money/Remarker.vue";
@@ -39,8 +39,8 @@ import store from "@/store/index2";
   },
 })
 export default class EditLabel extends Vue {
-  tag?: { id: string; name: string } = undefined;
-  // tag = undefined;
+  // tag?: { id: string; name: string };
+  tag?: Tag = undefined;
 
   created() {
     // 得到edit/路径id

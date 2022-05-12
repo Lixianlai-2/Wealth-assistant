@@ -3,9 +3,9 @@ declare module "*.svg" {
   export default content;
 }
 
-const Tag = {
-  id: string,
-  name: string,
+type Tag = {
+  id: string;
+  name: string;
 };
 
 type TagListType = {

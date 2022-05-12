@@ -5,10 +5,10 @@
     </div>
     <ul>
       <li
-        v-for="tag in dataSources"
+        v-for="tag in tags"
         :key="tag.id"
-        @click="toggle(tag)"
-        :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
+        @click="toggle(tag.name)"
+        :class="{ selected: selectedTags.indexOf(tag.name) >= 0 }"
       >
         {{ tag.name }}
       </li>
@@ -19,15 +19,14 @@
 <script lang="ts">
 import store from "@/store/index2";
 import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 
 // selectedTags.indexOf(tag) >= 0
+console.log(store.tagList);
+
 @Component
 export default class tags extends Vue {
-  // tag?: {};
-
-  // 外部传入的数据,readonly是提示不要去修改数据
-  @Prop() readonly dataSources: string[] | undefined;
+  tags = store.tagList;
 
   // 下面的类型是字符串空数组，让它等于空数组
   selectedTags: string[] = [];
@@ -37,23 +36,10 @@ export default class tags extends Vue {
     // 显示一个对话框，对话框中包含一条文字信息，用来提示用户输入文字
     // result = store.prompt(text, value);
     let result = window.prompt("新增标签");
-    if (result) store.createTag(result);
-
-    if (result === "") {
-      alert("输入不能为空哟");
-      return;
-    } else if (result === null) {
-      return;
-    }
-
-    if (this.dataSources) {
-      // 避免标签重复
-      if (this.dataSources.indexOf(result) >= 0) {
-        alert("标签重复了");
-        return;
-      }
-
-      this.$emit("update:dataSources", [...this.dataSources, result]);
+    if (!result) {
+      return window.alert("标签名不能为空");
+    } else {
+      store.createTag(result);
     }
   }
 
