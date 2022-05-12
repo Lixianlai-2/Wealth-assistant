@@ -4,7 +4,7 @@
       <!-- v-on的缩写就是@，用来绑定事件监听器 -->
       <Tags :dataSources="fetchedTags" @update:value="updateTagFn" />
       <Remarker
-        value="Money组件设置的内容"
+        value="在这儿备注"
         fieldName="备注"
         @update:value="updateRemarkFn"
       />
@@ -22,12 +22,13 @@ import numberPad from "@/components/Money/NumberPad.vue";
 import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
 import { Component } from "vue-property-decorator";
+import store from "@/store/index2";
 
 // 注册组件
 @Component({ components: { Tags, Remarker, Budget, numberPad } })
 export default class Money extends Vue {
   // 让money部分的标签和Labels部分的标签都来自同一个地方，一个地方修改，另一个地方就都修改了！
-  fetchedTags = window.tagList;
+  fetchedTags = store.tagList;
 
   // record是一个数据，它的类型是Record
   record: RecordType = {
@@ -39,7 +40,7 @@ export default class Money extends Vue {
   };
 
   // 数组里面都是Record类型
-  recordList = window.recordList;
+  recordList = store.recordList;
   // recordList = recordListFetched;
 
   updateTagFn(value: string[]) {
@@ -60,7 +61,7 @@ export default class Money extends Vue {
   }
 
   saveRecords() {
-    window.createRecord(this.record);
+    store.createRecord(this.record);
     alert("点击OK生效了");
   }
 }

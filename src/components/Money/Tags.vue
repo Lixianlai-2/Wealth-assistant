@@ -17,6 +17,7 @@
 </template>
 
 <script lang="ts">
+import store from "@/store/index2";
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
@@ -34,9 +35,9 @@ export default class tags extends Vue {
   // 新增标签
   createTag() {
     // 显示一个对话框，对话框中包含一条文字信息，用来提示用户输入文字
-    // result = window.prompt(text, value);
+    // result = store.prompt(text, value);
     let result = window.prompt("新增标签");
-    if (result) window.createTag(result);
+    if (result) store.createTag(result);
 
     if (result === "") {
       alert("输入不能为空哟");
@@ -58,7 +59,6 @@ export default class tags extends Vue {
 
   // 把对应的tag添加到selectedTags数组中，或从中删除，以实现selected：true或selected:false
   toggle(tag: string) {
-    alert("点击li触发了");
     const index = this.selectedTags.indexOf(tag); //返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1
 
     // 如果数组中已经有了这个标签，那么就删除这个。也就是说，原来选中有颜色了，就取消颜色

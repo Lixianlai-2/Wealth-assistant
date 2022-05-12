@@ -30,6 +30,7 @@ import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 // import Remarker from "@/components/Money/Remarker.vue";
 import Remarker from "../components/Money/Remarker.vue";
 import Button from "../components/Money/Button.vue";
+import store from "@/store/index2";
 
 @Component({
   components: {
@@ -49,7 +50,7 @@ export default class EditLabel extends Vue {
     const id = this.$route.params.id;
 
     // tags是包含Tag类型的数组，而Tag是对象
-    const tags = window.tagList;
+    const tags = store.tagList;
     // 得到路径id与数据库id相等的那个对象（也就是Tag类型）
     const tag = tags.filter((tag) => tag.id === id)[0];
     if (tag) {
@@ -62,14 +63,14 @@ export default class EditLabel extends Vue {
 
   updateTag(name: string) {
     if (this.tag) {
-      window.updateTag(this.tag.id, name);
+      store.updateTag(this.tag.id, name);
     }
   }
 
   remove() {
     alert("removeTag works");
     if (this.tag) {
-      if (window.removeTag(this.tag.id)) {
+      if (store.removeTag(this.tag.id)) {
         this.$router.back();
       } else {
         alert("删除失败");

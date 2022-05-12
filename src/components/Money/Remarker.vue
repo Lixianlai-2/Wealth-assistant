@@ -55,7 +55,7 @@ export default class remark extends Vue {
     background: transparent;
     border: none;
     padding-right: 16px;
-    // color: #f4f4f4fa;
+    color: #7067678f;
   }
   // 点击输入框时，原本自带的颜色消失
   input:focus {

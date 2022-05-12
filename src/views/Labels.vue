@@ -25,6 +25,7 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Button from "@/components/Money/Button.vue";
+import store from "@/store/index2";
 // import icon from "@/components/icon.vue";
 
 // 从localStorage中获得数据，保存到其中的data中
@@ -33,12 +34,12 @@ import Button from "@/components/Money/Button.vue";
   components: { Button },
 })
 export default class Labels extends Vue {
-  tags = window.tagList;
+  tags = store.tagList;
 
   create() {
     const name = window.prompt("请输入您要添加的标签");
     if (name) {
-      window.createTag(name);
+      store.createTag(name);
     }
   }
 }
