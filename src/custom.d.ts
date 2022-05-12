@@ -25,16 +25,4 @@ type RecordType = {
   CreateDate?: Date; // 类，即构造函数
 };
 
-interface Window {
-  // store: {
-  //   tagList: Tag[];
-  //   createTag: (name: string) => void;
-  //   removeTag: (id: string) => boolean;
-  //   updateTag: (
-  //     id: string,
-  //     name: string
-  //   ) => "success" | "not found" | "duplicate";
-  //   recordList: RecordType[];
-  //   createRecord: (record: RecordType) => void;
-  // };
-}
+interface Window {}
