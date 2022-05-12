@@ -19,11 +19,6 @@ const recordListModel = {
       JSON.stringify(this.data)
     );
   },
-  // cloneRecordDeep(value: RecordType | RecordType[]) {
-  //   let deepCloneRecord: RecordType = JSON.parse(JSON.stringify(value));
-  //   deepCloneRecord.CreateDate = new Date();
-  //   return deepCloneRecord; //记得return
-  // },
   create(record: RecordType) {
     const record2: RecordType = clone(record);
     // const record2: RecordType = this.cloneRecordDeep(record);
