@@ -24,10 +24,8 @@ import Remarker from "@/components/Money/Remarker.vue";
 import { Component, Watch } from "vue-property-decorator";
 import { recordListModel } from "@/models/recordListModel";
 
-// const model = require("@/model.ts");
-
 // 将从model抓取到的数据，赋值给recordList这个变量，这个变量也被定义为Record[]类型
-let recordListFetched = recordListModel.fetch();
+let recordListFetched = window.recordList;
 
 // 注册组件
 @Component({ components: { Tags, Remarker, Budget, numberPad } })
@@ -65,14 +63,8 @@ export default class Money extends Vue {
   }
 
   saveRecords() {
-    this.recordList.push(recordListModel.cloneRecordDeep(this.record));
-    // recordListModel.create(this.record);
+    window.createRecord(this.record);
     alert("点击OK生效了");
-  }
-
-  @Watch("recordList")
-  onRecordChange() {
-    recordListModel.save(this.recordList);
   }
 }
 </script>

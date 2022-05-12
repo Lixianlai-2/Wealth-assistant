@@ -33,4 +33,6 @@ interface Window {
     id: string,
     name: string
   ) => "success" | "not found" | "duplicate";
+  recordList: RecordType[];
+  createRecord: (record: RecordType) => void;
 }
