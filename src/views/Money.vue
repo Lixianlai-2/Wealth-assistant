@@ -22,7 +22,6 @@ import numberPad from "@/components/Money/NumberPad.vue";
 import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
 import { Component } from "vue-property-decorator";
-// import store from "@/store/index2";
 
 // 注册组件
 @Component({
@@ -32,13 +31,12 @@ import { Component } from "vue-property-decorator";
     recordList() {
       return this.$store.state.recordList;
     },
+    tagList() {
+      return this.$store.state.tagList;
+    },
   },
 })
 export default class Money extends Vue {
-  // 让money部分的标签和Labels部分的标签都来自同一个地方，一个地方修改，另一个地方就都修改了！
-  // TODO:tag部分等会再弄
-  // fetchedTags = store.tagList;
-
   // record是一个数据，它的类型是Record
   record: RecordType = {
     tags: [],
@@ -62,7 +60,7 @@ export default class Money extends Vue {
   }
   updateNumberPadFn(value: string) {
     this.record.numberPad = parseFloat(value); // 把传入的字符串变成数字
-    let currentTime = new Date();
+    // let currentTime = new Date();
   }
 
   saveRecords() {

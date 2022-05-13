@@ -1,5 +1,3 @@
-// import { TagListModel } from "@/models/tagListModel";
-
 import createId from "@/lip/idCreator";
 let localStorageKeyName = "tagList";
 

@@ -5,7 +5,7 @@
     </div>
     <ul>
       <li
-        v-for="tag in tags"
+        v-for="tag in tagList"
         :key="tag.id"
         @click="toggle(tag.name)"
         :class="{ selected: selectedTags.indexOf(tag.name) >= 0 }"
@@ -17,19 +17,29 @@
 </template>
 
 <script lang="ts">
-import store from "@/store/index2";
+// import store from "@/store/index2";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
 // selectedTags.indexOf(tag) >= 0
-console.log(store.tagList);
+// console.log($store.state.tagList);
 
-@Component
+@Component({
+  computed: {
+    tagList() {
+      return this.$store.state.tagList;
+    },
+  },
+})
 export default class tags extends Vue {
-  tags = store.tagList;
+  // tags = this.$store.state.tagList;
 
   // 下面的类型是字符串空数组，让它等于空数组
   selectedTags: string[] = [];
+  // 一旦页面created，就执行读取最新本地仓库到tagList里面
+  created() {
+    this.$store.commit("fetchTags");
+  }
 
   // 新增标签
   createTag() {
@@ -39,7 +49,7 @@ export default class tags extends Vue {
     if (!result) {
       return window.alert("标签名不能为空");
     } else {
-      store.createTag(result);
+      this.$store.commit("createTags", result);
     }
   }
 
