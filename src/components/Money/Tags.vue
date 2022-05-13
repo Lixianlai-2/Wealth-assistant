@@ -18,7 +18,8 @@
 
 <script lang="ts">
 // import store from "@/store/index2";
-import Vue from "vue";
+import TagHelper from "@/mixins/tagHelper";
+import { mixins } from "vue-class-component";
 import { Component } from "vue-property-decorator";
 
 // selectedTags.indexOf(tag) >= 0
@@ -31,7 +32,7 @@ import { Component } from "vue-property-decorator";
     },
   },
 })
-export default class tags extends Vue {
+export default class tags extends mixins(TagHelper) {
   // tags = this.$store.state.tagList;
 
   // 下面的类型是字符串空数组，让它等于空数组

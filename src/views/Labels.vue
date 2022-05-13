@@ -14,7 +14,7 @@
         </router-link>
       </div>
       <div class="tagBtnContainer">
-        <Button @click.native="create">新建标签</Button>
+        <Button @click.native="createTag">新建标签</Button>
         <!--  <Button class="newTag" @click="createTag">新建标签</Button>-->
       </div>
     </layout>
@@ -22,25 +22,29 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Button from "@/components/Money/Button.vue";
-import store from "@/store/index2";
+import { TagHelper } from "@/mixins/tagHelper";
+import { mixins } from "vue-class-component";
+// import store from "@/store/index2";
 // import icon from "@/components/icon.vue";
 
 // 从localStorage中获得数据，保存到其中的data中
 
 @Component({
-  components: { Button },
+  components: {
+    Button,
+  },
+  computed: {
+    tags() {
+      return this.$store.state.tagList;
+    },
+  },
 })
-export default class Labels extends Vue {
-  tags = store.tagList;
-
-  create() {
-    const name = window.prompt("请输入您要添加的标签");
-    if (name) {
-      store.createTag(name);
-    }
+export default class Labels extends mixins(TagHelper) {
+  // 每次重新刷新页面，就要fetch一次Tags内容
+  created() {
+    this.$store.commit("fetchTags");
   }
 }
 </script>
