@@ -11,6 +11,7 @@
       <Budget :propA="1" @update:value="updateBudgetFn" />
       <!-- 绑定submit事件，当点击numberPad的OK时，触发这里面的submit事件，执行saveRecords函数 -->
       <numberPad @update:value="updateNumberPadFn" @submit="saveRecords" />
+      {{ count1 }} <button @click="$store.commit('increment')">点击它+1</button>
     </layout>
   </div>
 </template>
@@ -25,7 +26,15 @@ import { Component } from "vue-property-decorator";
 import store from "@/store/index2";
 
 // 注册组件
-@Component({ components: { Tags, Remarker, Budget, numberPad } })
+@Component({
+  components: { Tags, Remarker, Budget, numberPad },
+  computed: {
+    count1() {
+      // 每当 store3.state.count 变化的时候, 都会重新求取计算属性，并且触发更新相关联的 DOM。
+      return this.$store.state.count;
+    },
+  },
+})
 export default class Money extends Vue {
   // 让money部分的标签和Labels部分的标签都来自同一个地方，一个地方修改，另一个地方就都修改了！
   fetchedTags = store.tagList;

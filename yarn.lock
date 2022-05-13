@@ -1224,11 +1224,6 @@
   "resolved" "https://registry.npmmirror.com/@soda/get-current-script/-/get-current-script-1.0.2.tgz"
   "version" "1.0.2"
 
-"@trysound/sax@0.2.0":
-  "integrity" "sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA=="
-  "resolved" "https://registry.npmmirror.com/@trysound/sax/-/sax-0.2.0.tgz"
-  "version" "0.2.0"
-
 "@types/babel__core@^7.1.0":
   "integrity" "sha512-WEOTgRsbYkvA/KCsDwVEGkd7WAr1e3g31VHQ8zy5gul/V1qKullU/BU5I68X5v7V3GnB9eotmom4v5a5gjxorw=="
   "resolved" "https://registry.npmmirror.com/@types/babel__core/-/babel__core-7.1.19.tgz"
@@ -3385,11 +3380,6 @@
   "resolved" "https://registry.npmmirror.com/commander/-/commander-2.20.3.tgz"
   "version" "2.20.3"
 
-"commander@^7.2.0":
-  "integrity" "sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw=="
-  "resolved" "https://registry.npmmirror.com/commander/-/commander-7.2.0.tgz"
-  "version" "7.2.0"
-
 "commander@~2.19.0":
   "integrity" "sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg=="
   "resolved" "https://registry.npmmirror.com/commander/-/commander-2.19.0.tgz"
@@ -3732,7 +3722,7 @@
     "domutils" "^2.8.0"
     "nth-check" "^2.0.1"
 
-"css-tree@^1.1.2", "css-tree@^1.1.3":
+"css-tree@^1.1.2":
   "integrity" "sha512-tRpdppF7TRazZrjJ6v3stzv93qxRcSsFmW6cX0Zm2NVKpxE1WV1HblnghVv9TreireHkqI/VDEsfolRF1p6y7Q=="
   "resolved" "https://registry.npmmirror.com/css-tree/-/css-tree-1.1.3.tgz"
   "version" "1.1.3"
@@ -3841,7 +3831,7 @@
     "is-resolvable" "^1.0.0"
     "postcss" "^7.0.0"
 
-"csso@^4.0.2", "csso@^4.2.0":
+"csso@^4.0.2":
   "integrity" "sha512-wvlcdIbf6pwKEk7vHj8/Bkc0B4ylXZruLvOgs9doS5eOsOpuodOV2zJChSpkp+pRpYQLQMeF04nr3Z68Sta9jA=="
   "resolved" "https://registry.npmmirror.com/csso/-/csso-4.2.0.tgz"
   "version" "4.2.0"
@@ -7088,6 +7078,15 @@
     "emojis-list" "^3.0.0"
     "json5" "^1.0.1"
 
+"loader-utils@^1.0.3":
+  "integrity" "sha512-qH0WSMBtn/oHuwjy/NucEgbx5dbxxnxup9s4PVXJUDHZBQY+s0NWA9rJf53RBnQZxfch7euUui7hpoAPvALZdA=="
+  "resolved" "https://registry.npmmirror.com/loader-utils/-/loader-utils-1.4.0.tgz"
+  "version" "1.4.0"
+  dependencies:
+    "big.js" "^5.2.2"
+    "emojis-list" "^3.0.0"
+    "json5" "^1.0.1"
+
 "loader-utils@^1.1.0":
   "integrity" "sha512-qH0WSMBtn/oHuwjy/NucEgbx5dbxxnxup9s4PVXJUDHZBQY+s0NWA9rJf53RBnQZxfch7euUui7hpoAPvALZdA=="
   "resolved" "https://registry.npmmirror.com/loader-utils/-/loader-utils-1.4.0.tgz"
@@ -10181,7 +10180,16 @@
     "mitt" "1.1.2"
     "svg-baker" "^1.7.0"
 
-"svg-baker@^1.5.0", "svg-baker@^1.7.0":
+"svg-baker-runtime@1.4.1":
+  "integrity" "sha512-4HLs8dU5kP4+zWix3MoZUge7kSVO6VCg14dLJWVIRWZx1vik21k/h5T620VXRoIyn0nw8g1R8Qk+VvW9BLOOPA=="
+  "resolved" "https://registry.npmmirror.com/svg-baker-runtime/-/svg-baker-runtime-1.4.1.tgz"
+  "version" "1.4.1"
+  dependencies:
+    "deepmerge" "1.3.2"
+    "mitt" "1.1.2"
+    "svg-baker" "^1.4.0"
+
+"svg-baker@^1.4.0", "svg-baker@^1.4.1", "svg-baker@^1.5.0", "svg-baker@^1.7.0":
   "integrity" "sha512-nibslMbkXOIkqKVrfcncwha45f97fGuAOn1G99YwnwTj8kF9YiM6XexPcUso97NxOm6GsP0SIvYVIosBis1xLg=="
   "resolved" "https://registry.npmmirror.com/svg-baker/-/svg-baker-1.7.0.tgz"
   "version" "1.7.0"
@@ -10200,15 +10208,31 @@
     "query-string" "^4.3.2"
     "traverse" "^0.6.6"
 
-"svg-sprite-loader@6.0.9":
-  "integrity" "sha512-V/F3iI1J/xWeO0cRXkEFvhujvBQ3deAPFlhip+AW00Hs+9gighu619mblucIWdRPmDMfcSWJD/ZuXf6HldIskw=="
-  "resolved" "https://registry.npmmirror.com/svg-sprite-loader/-/svg-sprite-loader-6.0.9.tgz"
-  "version" "6.0.9"
+"svg-sprite-loader-mod@^4.1.6-mod1":
+  "integrity" "sha512-hK3eUAWIUE0KuG2PtWlNDrCXVdQQdVFfKn+bJSsSfPpxC+91TESVCLiIL1laofgAZmbL1h9kCiVy1PAUhcAXFg=="
+  "resolved" "https://registry.npmmirror.com/svg-sprite-loader-mod/-/svg-sprite-loader-mod-4.1.6-mod1.tgz"
+  "version" "4.1.6-mod1"
   dependencies:
     "bluebird" "^3.5.0"
     "deepmerge" "1.3.2"
     "domready" "1.0.8"
     "escape-string-regexp" "1.0.5"
+    "html-webpack-plugin" "^3.2.0"
+    "loader-utils" "^1.1.0"
+    "svg-baker" "^1.4.1"
+    "svg-baker-runtime" "1.4.1"
+    "url-slug" "2.0.0"
+
+"svg-sprite-loader@^4.1.6":
+  "integrity" "sha512-IkXI2e0bWr32G6VCqw0g8x8eRsMSUKkyd3axnI6D5pEZ9zv3Zi7FTVVnOUi/Io3i2D1UAofOW+35N8qwIUql4w=="
+  "resolved" "https://registry.npmmirror.com/svg-sprite-loader/-/svg-sprite-loader-4.3.0.tgz"
+  "version" "4.3.0"
+  dependencies:
+    "bluebird" "^3.5.0"
+    "deepmerge" "1.3.2"
+    "domready" "1.0.8"
+    "escape-string-regexp" "1.0.5"
+    "html-webpack-plugin" "^3.2.0"
     "loader-utils" "^1.1.0"
     "svg-baker" "^1.5.0"
     "svg-baker-runtime" "^1.4.7"
@@ -10218,6 +10242,14 @@
   "integrity" "sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA=="
   "resolved" "https://registry.npmmirror.com/svg-tags/-/svg-tags-1.0.0.tgz"
   "version" "1.0.0"
+
+"svgo-loader@^2.2.1":
+  "integrity" "sha512-UeE/4yZEK96LoYqvxwh8YqCOJCjXwRY9K6YT99vXE+nYhs/W8hAY2hNf5zg/lRsyKshJkR79V+4beV3cbGL40Q=="
+  "resolved" "https://registry.npmmirror.com/svgo-loader/-/svgo-loader-2.2.2.tgz"
+  "version" "2.2.2"
+  dependencies:
+    "js-yaml" "^3.13.1"
+    "loader-utils" "^1.0.3"
 
 "svgo@^1.0.0":
   "integrity" "sha512-yhy/sQYxR5BkC98CY7o31VGsg014AKLEPxdfhora76l36hD9Rdy5NZA/Ocn6yayNPgSamYdtX2rFJdcv07AYVw=="
@@ -10237,19 +10269,6 @@
     "stable" "^0.1.8"
     "unquote" "~1.1.1"
     "util.promisify" "~1.0.0"
-
-"svgo@^2.8.0":
-  "integrity" "sha512-+N/Q9kV1+F+UeWYoSiULYo4xYSDQlTgb+ayMobAXPwMnLvop7oxKMo9OzIrX5x3eS4L4f2UHhc9axXwY8DpChg=="
-  "resolved" "https://registry.npmmirror.com/svgo/-/svgo-2.8.0.tgz"
-  "version" "2.8.0"
-  dependencies:
-    "@trysound/sax" "0.2.0"
-    "commander" "^7.2.0"
-    "css-select" "^4.1.3"
-    "css-tree" "^1.1.3"
-    "csso" "^4.2.0"
-    "picocolors" "^1.0.0"
-    "stable" "^0.1.8"
 
 "symbol-tree@^3.2.2":
   "integrity" "sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw=="
@@ -10955,10 +10974,10 @@
   "resolved" "https://registry.npmmirror.com/vue/-/vue-2.6.14.tgz"
   "version" "2.6.14"
 
-"vuex@3.6.2":
-  "integrity" "sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw=="
-  "resolved" "https://registry.npmmirror.com/vuex/-/vuex-3.6.2.tgz"
-  "version" "3.6.2"
+"vuex@3.1.2":
+  "integrity" "sha512-ha3jNLJqNhhrAemDXcmMJMKf1Zu4sybMPr9KxJIuOpVcsDQlTBYLLladav2U+g1AvdYDG5Gs0xBTb0M5pXXYFQ=="
+  "resolved" "https://registry.npmmirror.com/vuex/-/vuex-3.1.2.tgz"
+  "version" "3.1.2"
 
 "w3c-hr-time@^1.0.1":
   "integrity" "sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ=="
