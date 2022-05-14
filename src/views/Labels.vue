@@ -35,13 +35,11 @@ import { mixins } from "vue-class-component";
   components: {
     Button,
   },
-  computed: {
-    tags() {
-      return this.$store.state.tagList;
-    },
-  },
 })
 export default class Labels extends mixins(TagHelper) {
+  get tags() {
+    return this.$store.state.tagList;
+  }
   // 每次重新刷新页面，就要fetch一次Tags内容
   created() {
     this.$store.commit("fetchTags");

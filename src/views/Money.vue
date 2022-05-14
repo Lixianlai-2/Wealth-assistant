@@ -37,6 +37,9 @@ import { Component } from "vue-property-decorator";
   },
 })
 export default class Money extends Vue {
+  get recordList() {
+    return this.$store.state.recordList;
+  }
   // record是一个数据，它的类型是Record
   record: RecordType = {
     tags: [],
@@ -66,6 +69,7 @@ export default class Money extends Vue {
   saveRecords() {
     this.$store.commit("createRecord", this.record);
     alert("点击OK生效了");
+    console.log(this.recordList);
   }
 }
 </script>

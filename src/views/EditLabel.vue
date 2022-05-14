@@ -9,7 +9,7 @@
       <div class="Remarker-wrapper">
         <Remarker
           class="remark"
-          :value="tag.name"
+          :value="currentTag.name"
           fieldName="标签名"
           holderName="请输入标签"
           @update:value="updateTag"
@@ -30,7 +30,7 @@ import { Vue, Component } from "vue-property-decorator";
 // import Remarker from "@/components/Money/Remarker.vue";
 import Remarker from "../components/Money/Remarker.vue";
 import Button from "../components/Money/Button.vue";
-import store from "@/store/index2";
+// import this.$store from "@/this.$store/index2";
 
 @Component({
   components: {
@@ -39,47 +39,41 @@ import store from "@/store/index2";
   },
 })
 export default class EditLabel extends Vue {
-  // tag?: { id: string; name: string };
-  tag?: Tag = undefined;
+  get currentTag() {
+    return this.$store.state.currentTag;
+  }
 
+  // 声明周期钩子，可以调用函数
   created() {
-    // 得到edit/路径id
-    // 后面与从数据库中得到的内容对比跳转
-    // 无论edit后面的数字是几，这里都可以运行
-
+    // 得到当前页面的路径id
     const id = this.$route.params.id;
+    // 每次加载页面都重新获取最新的数据，重新渲染页面
+    this.$store.commit("fetchTags");
+    // 将数据库中的id与路径id相同的对象内容赋值给currentTag(可能不存在，会赋值为null)
+    this.$store.commit("setCurrentTag", id);
 
-    // tags是包含Tag类型的数组，而Tag是对象
-    const tags = store.tagList;
-    // 得到路径id与数据库id相等的那个对象（也就是Tag类型）
-    const tag = tags.filter((tag) => tag.id === id)[0];
-    if (tag) {
-      this.tag = tag;
-    } else {
-      // 如果没有合适的就跳转到404页面
+    // 如果currentTag不存在，那么就代表
+    if (!this.currentTag) {
       this.$router.replace("/404");
     }
   }
 
   updateTag(name: string) {
-    if (this.tag) {
-      store.updateTag(this.tag.id, name);
+    if (this.currentTag) {
+      // 判断当前路径id是否存在于数据库id中，如果存在就判断标签名是否重复并更改对应数据库内容，如果不存在就返回404页面
+      this.$store.commit("updateTags", {
+        id: this.currentTag.id,
+        name,
+      });
     }
   }
 
   remove() {
     alert("removeTag works");
-    if (this.tag) {
-      if (store.removeTag(this.tag.id)) {
-        this.$router.back();
-      } else {
-        alert("删除失败");
-      }
+    if (this.currentTag) {
+      this.$store.commit("removeTags", this.currentTag.id);
     }
-  }
-
-  deleteTag() {
-    alert("delete 生效了");
+    this.goBack();
   }
 
   goBack() {
