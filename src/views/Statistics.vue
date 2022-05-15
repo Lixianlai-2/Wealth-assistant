@@ -21,26 +21,18 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-
-import Budget from "../components/Money/Budget.vue";
 import Tabs from "../components/Tabs.vue";
+import intervalList from "@/constants/interval";
+import budgetList from "@/constants/budget";
 
 @Component({
   components: {
-    Budget,
     Tabs,
   },
 })
 export default class Statistics extends Vue {
-  intervalList = [
-    { text: "按天", value: "day" },
-    { text: "按周", value: "weekend" },
-    { text: "按月", value: "month" },
-  ];
-  budgetList = [
-    { text: "支出", value: "-" },
-    { text: "收入", value: "+" },
-  ];
+  intervalList = intervalList;
+  budgetList = budgetList;
 
   budgetType = "-";
   interval = "day";
@@ -57,6 +49,11 @@ export default class Statistics extends Vue {
       display: none;
     }
   }
+}
+
+::v-deep ul > li.interval-tab {
+  // border: 1px solid blue;
+  height: 40px;
 }
 
 // ::v-deep .budget-tab.selected {

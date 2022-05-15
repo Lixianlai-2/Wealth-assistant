@@ -5,6 +5,7 @@
       :key="item.value"
       @click="select(item)"
       :class="liClass(item)"
+      class="thisIsOk"
     >
       {{ item.text }}
     </li>

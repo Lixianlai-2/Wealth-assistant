@@ -1,15 +1,19 @@
 <template>
   <div>
     <layout contentClass="growTags" class-prefix="layout">
-      <!-- v-on的缩写就是@，用来绑定事件监听器 -->
       <Tags @update:value="updateTagFn" />
       <Remarker
         value="在这儿备注"
         fieldName="备注"
         @update:value="updateRemarkFn"
       />
-      <Budget :propA="1" @update:value="updateBudgetFn" />
-      <!-- 绑定submit事件，当点击numberPad的OK时，触发这里面的submit事件，执行saveRecords函数 -->
+
+      <Tabs
+        class-prefix="money"
+        :dataSource="budgetList"
+        :value.sync="budgetType"
+      />
+
       <numberPad @update:value="updateNumberPadFn" @submit="saveRecords" />
     </layout>
   </div>
@@ -19,13 +23,14 @@
 import Vue from "vue";
 import Tags from "@/components/Money/Tags.vue";
 import numberPad from "@/components/Money/NumberPad.vue";
-import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
 import { Component } from "vue-property-decorator";
+import Tabs from "../components/Tabs.vue";
+import budgetList from "@/constants/budget";
 
 // 注册组件
 @Component({
-  components: { Tags, Remarker, Budget, numberPad },
+  components: { Tags, Remarker, Tabs, numberPad },
   computed: {
     // 监听里面的内容，当数据改变时，重新渲染页面
     recordList() {
@@ -48,6 +53,9 @@ export default class Money extends Vue {
     numberPad: 0,
     CreateDate: new Date(),
   };
+
+  budgetList = budgetList;
+  budgetType = "-";
 
   updateTagFn(value: string[]) {
     console.log("更新tag数据works");
@@ -74,7 +82,11 @@ export default class Money extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
+::v-deep .money-tab {
+  /* border: 1px solid red; */
+}
+
 .layout-content {
   display: flex;
   flex-direction: column;
