@@ -1,6 +1,7 @@
 <template>
   <div>
     <layout contentClass="growTags" class-prefix="layout">
+      <!-- v-on的缩写就是@，用来绑定事件监听器 -->
       <Tags @update:value="updateTagFn" />
       <Remarker
         value="在这儿备注"
@@ -24,6 +25,7 @@
 import Vue from "vue";
 import Tags from "@/components/Money/Tags.vue";
 import numberPad from "@/components/Money/NumberPad.vue";
+import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
 import { Component } from "vue-property-decorator";
 import Tabs from "@/components/Tabs.vue";
@@ -87,11 +89,7 @@ export default class Money extends Vue {
 }
 </script>
 
-<style scoped>
-::v-deep .money-tab {
-  /* border: 1px solid red; */
-}
-
+<style>
 .layout-content {
   display: flex;
   flex-direction: column;
