@@ -26,7 +26,7 @@ export default Vue.extend({});
 
 <style lang="scss" scoped>
 @import "~@/assets/styles/helper.scss";
-
+// import ""
 nav {
   // 文字对齐
   // text-align: center;

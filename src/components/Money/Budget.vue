@@ -1,9 +1,26 @@
 <template>
   <div class="budgetContainer">
     <ul>
-      <!-- 当type等于-时，才让class等于selected -->
+      <!-- <li
+        :class="{
+          [classPrefix + '-item']: classPrefix,
+          selected: value === '-',
+        }"
+        @click="selectType('-')"
+      >
+        支出
+      </li> -->
+
+      <!-- <li
+        :class="{
+          [classPrefix + '-item']: classPrefix,
+          selected: value === '+',
+        }"
+        @click="selectType('+')"
+      >
+        收入
+      </li> -->
       <li :class="type === '-' && 'selected'" @click="selectType('-')">支出</li>
-      <!-- 当type等于-时，才让class等于selected -->
       <li :class="type === '+' && 'selected'" @click="selectType('+')">收入</li>
     </ul>
   </div>
@@ -17,8 +34,8 @@ import Vue from "vue";
 import { Component, Watch, Prop } from "vue-property-decorator";
 @Component
 export default class Budget extends Vue {
-  // @Prop({ default: "default value" }) type!: string;
-  // @Prop() type!: string;
+  @Prop(String) classPrefix?: string;
+  @Prop(String) value!: string;
   type = "-";
 
   selectType(type: string) {
