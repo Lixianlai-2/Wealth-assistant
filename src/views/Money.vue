@@ -8,7 +8,13 @@
         fieldName="备注"
         @update:value="updateRemarkFn"
       />
-      <Budget :propA="1" @update:value="updateBudgetFn" />
+      <Tabs
+        :dataSource="budgetList"
+        classPrefix="money"
+        :value.sync="record.budget"
+        @update:value="updateBudgetFn"
+      />
+      <!-- <Budget :propA="1" @update:value="updateBudgetFn" /> -->
       <!-- 绑定submit事件，当点击numberPad的OK时，触发这里面的submit事件，执行saveRecords函数 -->
       <numberPad @update:value="updateNumberPadFn" @submit="saveRecords" />
     </layout>
@@ -22,10 +28,12 @@ import numberPad from "@/components/Money/NumberPad.vue";
 import Budget from "@/components/Money/Budget.vue";
 import Remarker from "@/components/Money/Remarker.vue";
 import { Component } from "vue-property-decorator";
+import Tabs from "@/components/Tabs.vue";
+import budgetList from "@/constants/budget";
 
 // 注册组件
 @Component({
-  components: { Tags, Remarker, Budget, numberPad },
+  components: { Tags, Remarker, Budget, numberPad, Tabs },
   computed: {
     // 监听里面的内容，当数据改变时，重新渲染页面
     recordList() {
@@ -48,6 +56,13 @@ export default class Money extends Vue {
     numberPad: 0,
     CreateDate: new Date(),
   };
+
+  budgetList = budgetList;
+  budgetType = "-";
+
+  mounted() {
+    this.$store.commit("fetchRecords");
+  }
 
   updateTagFn(value: string[]) {
     console.log("更新tag数据works");
