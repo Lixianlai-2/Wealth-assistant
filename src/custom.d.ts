@@ -3,6 +3,13 @@ declare module "*.svg" {
   export default content;
 }
 
+type RootState = {
+  recordList: RecordType[];
+  // 也可以是undefined
+  tagList: Tag[];
+  currentTag?: Tag;
+};
+
 type Tag = {
   id: string;
   name: string;
@@ -18,11 +25,11 @@ type TagListType = {
 };
 
 type RecordType = {
-  tags: string[];
+  tags: Tag[];
   remark: string;
   budget: string;
   numberPad: number;
-  CreateDate?: Date; // 类，即构造函数
+  CreateDate?: string;
 };
 
 interface Window {}

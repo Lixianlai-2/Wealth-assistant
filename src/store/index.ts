@@ -2,18 +2,11 @@ import Vue from "vue";
 import Vuex from "vuex";
 import clone from "@/lip/clone";
 import createId from "@/lip/idCreator";
-import router from "@/router";
+// import router from "@/router";
 
 // 因为Vuex实际上是插件，所以需要use
 // 相当于Vue.prototype.$store = store3 所以其他地方如果使用state.$store就相当于store3
 Vue.use(Vuex);
-
-type RootState = {
-  recordList: RecordType[];
-  // 也可以是undefined
-  tagList: Tag[];
-  currentTag?: Tag;
-};
 
 const store3 = new Vuex.Store({
   state: {
@@ -37,7 +30,8 @@ const store3 = new Vuex.Store({
     createRecord(state, record: RecordType) {
       const record2: RecordType = clone(record);
       // const record2: RecordType = state.cloneRecordDeep(record);
-      record2.CreateDate = new Date();
+      // toISOString() 方法返回一个 ISO（ISO 8601 Extended Format）格式的字符串： YYYY-MM-DDTHH:mm:ss.sssZ。时区总是UTC（协调世界时），加一个后缀“Z”标识。
+      record2.CreateDate = new Date().toISOString();
       state.recordList.push(record2);
       // 使用对象中的其他方法
       store3.commit("saveRecord");

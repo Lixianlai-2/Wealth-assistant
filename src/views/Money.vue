@@ -54,7 +54,7 @@ export default class Money extends Vue {
     remark: "",
     budget: "-",
     numberPad: 0,
-    CreateDate: new Date(),
+    CreateDate: undefined,
   };
 
   budgetList = budgetList;
@@ -64,7 +64,7 @@ export default class Money extends Vue {
     this.$store.commit("fetchRecords");
   }
 
-  updateTagFn(value: string[]) {
+  updateTagFn(value: Tag[]) {
     console.log("更新tag数据works");
     console.log(`money组件得到的新建标签所传来的 value:`, value);
     this.record.tags = value;

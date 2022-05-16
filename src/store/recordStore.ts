@@ -23,7 +23,7 @@ const recordStore = {
   createRecord(record: RecordType) {
     const record2: RecordType = clone(record);
     // const record2: RecordType = this.cloneRecordDeep(record);
-    record2.CreateDate = new Date();
+    record2.CreateDate = new Date().toISOString();
     this.recordList.push(record2);
     this.saveRecord();
   },
