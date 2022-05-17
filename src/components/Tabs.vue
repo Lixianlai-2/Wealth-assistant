@@ -44,26 +44,57 @@ export default class Tabs extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.tabs {
-  background: #c4c4c4;
+// .tabs {
+//   background: #c4c4c4;
+//   display: flex;
+//   text-align: center;
+//   font-size: 24px;
+//   > li {
+//     width: 50%;
+//     height: 64px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     position: relative;
+//     &.selected::after {
+//       content: "";
+//       position: absolute;
+//       bottom: 0;
+//       left: 0;
+//       width: 100%;
+//       height: 4px;
+//       background: #333;
+//     }
+//   }
+// }
+ul {
+  // border: 1px solid blue;
   display: flex;
-  text-align: center;
+  background: #c4c4c4;
   font-size: 24px;
+  // 行内内容（例如文字）如何相对它的块父元素对齐
+  // text-align: center;
+
   > li {
-    width: 50%;
-    height: 64px;
+    // border: 1px solid red;
     display: flex;
     justify-content: center;
+    width: 50%;
     align-items: center;
+    height: 64px;
     position: relative;
+
+    // 当前被选中的li
     &.selected::after {
       content: "";
       position: absolute;
-      bottom: 0;
-      left: 0;
+      // background-color: grey;
       width: 100%;
       height: 4px;
       background: #333;
+      // 跑到下边跟左边去
+      bottom: 0;
+      left: 0;
     }
   }
 }

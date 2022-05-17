@@ -4,7 +4,7 @@ declare module "*.svg" {
 }
 
 type RootState = {
-  recordList: RecordType[];
+  recordList: RecordItem[];
   // 也可以是undefined
   tagList: Tag[];
   currentTag?: Tag;
@@ -24,7 +24,7 @@ type TagListType = {
   remove: (id: string) => boolean;
 };
 
-type RecordType = {
+type RecordItem = {
   tags: Tag[];
   remark: string;
   budget: string;

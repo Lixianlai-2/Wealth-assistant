@@ -19,7 +19,7 @@ const store3 = new Vuex.Store({
     fetchRecords(state) {
       state.recordList = JSON.parse(
         window.localStorage.getItem("recordList") || "[]"
-      ) as RecordType[];
+      ) as RecordItem[];
     },
     saveRecord(state) {
       window.localStorage.setItem(
@@ -27,9 +27,9 @@ const store3 = new Vuex.Store({
         JSON.stringify(state.recordList)
       );
     },
-    createRecord(state, record: RecordType) {
-      const record2: RecordType = clone(record);
-      // const record2: RecordType = state.cloneRecordDeep(record);
+    createRecord(state, record: RecordItem) {
+      const record2: RecordItem = clone(record);
+      // const record2: RecordItem = state.cloneRecordDeep(record);
       // toISOString() 方法返回一个 ISO（ISO 8601 Extended Format）格式的字符串： YYYY-MM-DDTHH:mm:ss.sssZ。时区总是UTC（协调世界时），加一个后缀“Z”标识。
       record2.CreateDate = new Date().toISOString();
       state.recordList.push(record2);

@@ -26,7 +26,7 @@
 import Vue from "vue";
 
 // 引入并使用装饰器
-import { Component, Prop } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 @Component
 export default class Budget extends Vue {
   outputValue = "0"; // 使得默认输出为字符串0

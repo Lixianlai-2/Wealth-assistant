@@ -6,19 +6,21 @@
         :dataSource="budgetList"
         :value.sync="budgetType"
       />
-      <Tabs
+      <!-- <Tabs
         class-prefix="interval"
         :dataSource="intervalList"
         :value.sync="interval"
-      />
+      /> -->
 
       <ol>
-        <li v-for="(objValue, name) in result" :key="name">
-          <!-- 这里的objValue就是hashTableValue -->
-          <h3 class="title">{{ beautify(objValue.title) }}</h3>
+        <li v-for="(obj, index) in resultObjArr" :key="index">
+          <!-- 这里的obj就是hashTableValue -->
+          <h3 class="title">
+            {{ beautify(obj.title) }} <span>￥{{ obj.total }}</span>
+          </h3>
           <ol>
-            <!-- 因为HashTableValue里面的items属性是RecordType[]，所以可以对其进行遍历-->
-            <li v-for="item in objValue.items" :key="item.id" class="record">
+            <!-- 因为HashTableValue里面的items属性是RecordItem[]，所以可以对其进行遍历-->
+            <li v-for="item in obj.items" :key="item.id" class="record">
               <span>{{ tagString(item.tags) }}</span>
               <span class="notes">{{ item.remark }}</span>
               <span>￥{{ item.numberPad }}</span>
@@ -37,6 +39,7 @@ import Tabs from "../components/Tabs.vue";
 import intervalList from "@/constants/interval";
 import budgetList from "@/constants/budget";
 import dayjs from "dayjs";
+import clone from "@/lip/clone";
 
 @Component({
   components: {
@@ -68,25 +71,58 @@ export default class Statistics extends Vue {
     return (this.$store.state as RootState).recordList;
   }
 
-  get result() {
-    // 类型为RecordItem[]
+  get resultObjArr() {
     const { recordList } = this;
-    type HashTableValue = { title: string; items: RecordType[] };
+    if (recordList.length === 0) {
+      return [];
+    }
+    const newList = clone(recordList)
+      .filter((record) => record.budget === this.budgetType)
+      .sort(
+        (a, b) => dayjs(b.CreateDate).valueOf() - dayjs(a.CreateDate).valueOf()
+      );
 
-    // 一个空对象的类型如下
-    const hashTable: { [key: string]: HashTableValue } = {};
+    type FormatTypeArr = {
+      title: string;
+      total?: number;
+      items: RecordItem[];
+    }[];
+    // 得到newList中第一个RecordItem的格式化日期的对象数组
+    const formatDateObjArr: FormatTypeArr = [
+      //没有定义total，这里是被允许的
+      {
+        title: dayjs(newList[0].CreateDate).format("YYYY-M-D"),
+        items: [newList[0]],
+      },
+    ];
 
-    for (let i = 0; i < recordList.length; i++) {
-      // 每个RecordType里面是有CreateDate这个部分的
-      // 分隔开日期和时间
-      const [date, time] = recordList[i].CreateDate!.split("T");
-
-      hashTable[date] = hashTable[date] || { title: date, items: [] };
-
-      hashTable[date].items.push(recordList[i]);
+    // 注意是从第1位开始循环
+    for (let i = 1; i < newList.length; i++) {
+      const currentRecord = newList[i];
+      const lastFormatObj = formatDateObjArr[formatDateObjArr.length - 1];
+      // 如果最后一个对象中的title根现在的Record的时间，与currentRecord的时间相同，那么就把currentRecord放入这个lastFormatObj中
+      if (
+        dayjs(lastFormatObj.title).isSame(
+          dayjs(currentRecord.CreateDate),
+          "day"
+        )
+      ) {
+        // 如果传入的数据是最新的天数的，那么就将其放入到最新的天数的对象中,  因为recordList是经过降序排列的，所以只有最新的天数全部都处理完了，才会增加新的对象
+        lastFormatObj.items.push(currentRecord);
+      } else {
+        // formatDateObjArr的length，会随着添加新的内容而改变，而新添加的内容，恰恰就处于formatDateObjArr的最后一位
+        formatDateObjArr.push({
+          title: dayjs(currentRecord.CreateDate).format("YYYY-M-D"),
+          items: [currentRecord],
+        });
+      }
     }
 
-    return hashTable;
+    formatDateObjArr.map((obj) => {
+      obj.total = obj.items.reduce((sum, item) => sum + item.numberPad, 0);
+    });
+
+    return formatDateObjArr;
   }
 
   beforeCreate() {
@@ -102,16 +138,16 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .budget-tab {
-  // border: 3px solid red;
-  background: #ffffff;
-  &.selected {
-    background: #c4c4c4;
-    &::after {
-      display: none;
-    }
-  }
-}
+// ::v-deep .budget-tab {
+//   // border: 3px solid red;
+//   background: #c4c4c4;
+//   &.selected {
+//     background: #ffffff;
+//     &::after {
+//       display: none;
+//     }
+//   }
+// }
 
 ::v-deep ul > li.interval-tab {
   // border: 1px solid blue;
@@ -132,6 +168,7 @@ export default class Statistics extends Vue {
 
 .record {
   @extend %item;
+  background: #ffffff;
 }
 
 .notes {

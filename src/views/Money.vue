@@ -49,7 +49,7 @@ export default class Money extends Vue {
     return this.$store.state.recordList;
   }
   // record是一个数据，它的类型是Record
-  record: RecordType = {
+  record: RecordItem = {
     tags: [],
     remark: "",
     budget: "-",
