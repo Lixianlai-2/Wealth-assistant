@@ -4,9 +4,10 @@
       <!-- v-on的缩写就是@，用来绑定事件监听器 -->
       <Tags @update:value="updateTagFn" />
       <Remarker
-        value="在这儿备注"
+        holderName="在这儿备注"
         fieldName="备注"
         @update:value="updateRemarkFn"
+        :value="record.remark"
       />
       <Tabs
         :dataSource="budgetList"
@@ -82,9 +83,15 @@ export default class Money extends Vue {
   }
 
   saveRecords() {
+    if (this.record.tags.length === 0) {
+      return window.alert("请至少选择一个标签");
+    }
+    if (!this.record.numberPad) {
+      return alert("请输入金额");
+    }
     this.$store.commit("createRecord", this.record);
-    alert("点击OK生效了");
-    console.log(this.recordList);
+    window.alert("数据已保存");
+    this.record.remark = "";
   }
 }
 </script>

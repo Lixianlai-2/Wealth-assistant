@@ -6,13 +6,8 @@
         :dataSource="budgetList"
         :value.sync="budgetType"
       />
-      <!-- <Tabs
-        class-prefix="interval"
-        :dataSource="intervalList"
-        :value.sync="interval"
-      /> -->
 
-      <ol>
+      <ol v-if="resultObjArr.length > 0">
         <li v-for="(obj, index) in resultObjArr" :key="index">
           <!-- 这里的obj就是hashTableValue -->
           <h3 class="title">
@@ -28,6 +23,7 @@
           </ol>
         </li>
       </ol>
+      <div v-else class="noData"><span>目前没有记账呢</span></div>
     </layout>
   </div>
 </template>
@@ -73,14 +69,16 @@ export default class Statistics extends Vue {
 
   get resultObjArr() {
     const { recordList } = this;
-    if (recordList.length === 0) {
-      return [];
-    }
+
     const newList = clone(recordList)
       .filter((record) => record.budget === this.budgetType)
       .sort(
         (a, b) => dayjs(b.CreateDate).valueOf() - dayjs(a.CreateDate).valueOf()
       );
+
+    if (newList.length === 0) {
+      return [];
+    }
 
     type FormatTypeArr = {
       title: string;
@@ -175,5 +173,11 @@ export default class Statistics extends Vue {
   margin-right: auto;
   margin-left: 16px;
   color: #999;
+}
+
+.noData {
+  margin-top: 50px;
+  // margin: 0 auto;
+  text-align: center;
 }
 </style>

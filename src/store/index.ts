@@ -48,6 +48,12 @@ const store3 = new Vuex.Store({
       state.tagList = JSON.parse(
         window.localStorage.getItem("tagList") || "[]"
       ); // 得到字符串，解析为string[]
+      if (!state.tagList || state.tagList.length === 0) {
+        store3.commit("createTags", "吃饭");
+        store3.commit("createTags", "旅游");
+        store3.commit("createTags", "衣服");
+        store3.commit("createTags", "游戏");
+      }
     },
     saveTags(state) {
       window.localStorage.setItem("tagList", JSON.stringify(state.tagList));
@@ -66,6 +72,7 @@ const store3 = new Vuex.Store({
       // 没有重复的就添加到data中
       state.tagList.push({ id: id, name: name });
       store3.commit("saveTags");
+
       console.log("添加成功");
     },
     updateTags(state, { id, name }) {

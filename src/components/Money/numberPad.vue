@@ -106,8 +106,10 @@ export default class Budget extends Vue {
       height: 64px;
       background: transparent;
       border: none;
-      //
       float: left;
+      // 让button的黄色框消失
+      // outline: none;
+      // -webkit-tap-highlight-color: transparent;
       // 设定颜色
       $bg: #f2f2f2;
       // :nth-child(an+b) 这个 CSS 伪类首先找到所有当前元素的兄弟元素，然后按照位置先后顺序从1开始排序，

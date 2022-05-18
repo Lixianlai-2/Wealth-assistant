@@ -40,6 +40,7 @@ nav {
 
   > .item {
     border: 1px solid rgb(86, 90, 86, 0.15);
+    color: rgba(128, 128, 128, 0.644);
     display: flex;
     // 上下排列
     flex-direction: column;
@@ -50,7 +51,7 @@ nav {
   }
 
   .item.selected {
-    color: $color-highLight;
+    color: black;
   }
 }
 </style>

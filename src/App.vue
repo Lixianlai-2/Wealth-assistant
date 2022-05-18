@@ -28,6 +28,9 @@ export default {};
   // text-align: center;
   color: #333;
   background-color: #f4f4f4;
+  // 设置最大宽度并让其居中
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 #nav {
