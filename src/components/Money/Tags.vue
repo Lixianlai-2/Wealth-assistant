@@ -47,11 +47,11 @@ export default class tags extends mixins(TagHelper) {
     // 显示一个对话框，对话框中包含一条文字信息，用来提示用户输入文字
     // result = store.prompt(text, value);
     let result = window.prompt("新增标签");
-    alert(result);
     if (!result) {
       return;
     } else {
       this.$store.commit("createTags", result);
+      alert("添加成功");
     }
   }
 

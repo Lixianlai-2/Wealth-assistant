@@ -74,8 +74,6 @@ const store3 = new Vuex.Store({
       // 没有重复的就添加到data中
       state.tagList.push({ id: id, name: name });
       store3.commit("saveTags");
-
-      console.log("添加成功");
     },
     updateTags(state, { id, name }) {
       // 返回对象的id数据
