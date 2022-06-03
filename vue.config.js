@@ -2,6 +2,8 @@
 const path = require("path");
 
 module.exports = {
+  publicPath:
+    process.env.NODE_ENV === "production" ? "/wealth-assistant-website/" : "/",
   lintOnSave: false,
   chainWebpack: (config) => {
     // 确定icons所在的目录，定义为dir（也就是director目录的意思）

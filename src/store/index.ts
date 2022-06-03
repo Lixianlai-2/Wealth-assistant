@@ -60,11 +60,13 @@ const store3 = new Vuex.Store({
     },
     // tag store
     createTags(state, name: string) {
+      if (!name) return;
       // 返回的内容形成一个新的数组,里面都是name字符串
       const namesArr = state.tagList.map((obj) => obj.name);
       // 如果用户输入的标签name在数据库中已经存在了
       if (namesArr.indexOf(name) >= 0) {
         alert("标签不能重复哦");
+        return;
       }
 
       // 把number变成字符串数字
