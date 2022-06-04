@@ -15,6 +15,7 @@
         :value.sync="record.budget"
         @update:value="updateBudgetFn"
       />
+
       <!-- <Budget :propA="1" @update:value="updateBudgetFn" /> -->
       <!-- 绑定submit事件，当点击numberPad的OK时，触发这里面的submit事件，执行saveRecords函数 -->
       <numberPad @update:value="updateNumberPadFn" @submit="saveRecords" />

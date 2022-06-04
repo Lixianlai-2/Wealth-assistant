@@ -11,7 +11,12 @@
         <li v-for="(obj, index) in resultObjArr" :key="index">
           <!-- 这里的obj就是hashTableValue -->
           <h3 class="title">
-            {{ beautify(obj.title) }} <span>￥{{ obj.total }}</span>
+            {{ beautify(obj.title) }}
+            <span
+              >￥{{
+                typeof obj.total === "number" && obj.total.toFixed(2)
+              }}</span
+            >
           </h3>
           <ol>
             <!-- 因为HashTableValue里面的items属性是RecordItem[]，所以可以对其进行遍历-->
@@ -36,6 +41,8 @@ import intervalList from "@/constants/interval";
 import budgetList from "@/constants/budget";
 import dayjs from "dayjs";
 import clone from "@/lip/clone";
+// import * as _ from "lodash";
+// console.log(_.padStart("Hello TypeScript!", 20, " "));
 
 @Component({
   components: {
